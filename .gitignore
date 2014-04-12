@@ -56,3 +56,4 @@ xcschememanagement.*
 Resources/contacts.json
 runtime/ios/everlostlua iOS.app.dSYM/
 runtime/ios/everlostlua.app/
+frameworks/cocos2d-x/tools/tolua/userconf.ini
