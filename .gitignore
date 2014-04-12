@@ -54,3 +54,5 @@ xcschememanagement.*
 
 *.so
 Resources/contacts.json
+runtime/ios/everlostlua iOS.app.dSYM/
+runtime/ios/everlostlua.app/
