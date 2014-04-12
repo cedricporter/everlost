@@ -499,13 +499,13 @@
 		F293B3BD15EB7BE500256477 = {
 			isa = PBXGroup;
 			children = (
-				C03781AE18BF654500FE4F13 /* cocos2d_lua_bindings.xcodeproj */,
 				15A8A4031834BDA200142BE0 /* cocos2d_libs.xcodeproj */,
-				5023810617EBBCAC00990C9B /* ios */,
-				5023817117EBBE3400990C9B /* mac */,
+				C03781AE18BF654500FE4F13 /* cocos2d_lua_bindings.xcodeproj */,
 				F293BB7C15EB830F00256477 /* Classes */,
 				F293B3CB15EB7BE500256477 /* Frameworks */,
+				5023810617EBBCAC00990C9B /* ios */,
 				1A0227A417A3AA1A00B867AD /* Lua Common */,
+				5023817117EBBE3400990C9B /* mac */,
 				F293B3C915EB7BE500256477 /* Products */,
 				F293BC4615EB859D00256477 /* Resources */,
 			);
