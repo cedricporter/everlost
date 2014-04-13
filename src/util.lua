@@ -1,6 +1,3 @@
 require 'VisibleRect'
+require 'logger'
 
--- cclog
-cclog = function(...)
-    print(string.format(...))
-end

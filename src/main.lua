@@ -3,10 +3,10 @@ require "Cocos2dConstants"
 
 -- for CCLuaEngine traceback
 function __G__TRACKBACK__(msg)
-    cclog("----------------------------------------")
-    cclog("LUA ERROR: " .. tostring(msg) .. "\n")
-    cclog(debug.traceback())
-    cclog("----------------------------------------")
+    log.error("----------------------------------------")
+    log.error("LUA ERROR: " .. tostring(msg) .. "\n")
+    log.error(debug.traceback())
+    log.error("----------------------------------------")
 end
 
 local function main()
@@ -24,7 +24,7 @@ local function main()
     if (cc.PLATFORM_OS_IPHONE == targetPlatform) or (cc.PLATFORM_OS_IPAD == targetPlatform) or 
         (cc.PLATFORM_OS_ANDROID == targetPlatform) or (cc.PLATFORM_OS_WINDOWS == targetPlatform) or
     (cc.PLATFORM_OS_MAC == targetPlatform) then
-        cclog("result is ")
+        log.info("result is ")
         --require('debugger')()
         
     end

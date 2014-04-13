@@ -72,9 +72,9 @@ function game_main()
 	    node:setPhysicsBody(cc.PhysicsBody:createEdgeBox(cc.size(VisibleRect:getVisibleRect().width, VisibleRect:getVisibleRect().height)))
 	    node:setPosition(VisibleRect:center())
 	    
-	    cclog("origin x " .. VisibleRect:center().x .. " y " .. VisibleRect:center().y)
-	    cclog("rect width " .. VisibleRect:getVisibleRect().width .. " height " .. VisibleRect:getVisibleRect().height)
-	    cclog("visibleSize rect width " .. visibleSize.width .. " height " .. visibleSize.height)
+	    log.debug("origin x " .. VisibleRect:center().x .. " y " .. VisibleRect:center().y)
+	    log.debug("rect width " .. VisibleRect:getVisibleRect().width .. " height " .. VisibleRect:getVisibleRect().height)
+	    log.debug("visibleSize rect width " .. visibleSize.width .. " height " .. visibleSize.height)
 
 	    layer:addChild(node)
 	end
@@ -90,7 +90,7 @@ function game_main()
 	layer:setAccelerometerEnabled(true)
 
 	local function didAccelerate(x, y, z, timestamp)
-	    cclog("didAccelerate %f, %f, %f, %f", x, y, z, timestamp)
+	    log.debug("didAccelerate %f, %f, %f, %f", x, y, z, timestamp)
 	    cc.Director:getInstance():getRunningScene():getPhysicsWorld():setGravity(cc.p(x * 1000, y * 1000))
 	end
 
