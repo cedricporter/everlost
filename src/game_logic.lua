@@ -91,6 +91,7 @@ function game_main()
 
     -- run
     local sceneGame = cc.Scene:createWithPhysics()
+    sceneGame:getPhysicsWorld():setGravity(cc.p(-98,-98 * 2))
     -- sceneGame:addChild(creatDog())
     sceneGame:addChild(createPhysicsDemo())
     
