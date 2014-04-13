@@ -90,6 +90,7 @@ function game_main()
 
 	local function didAccelerate(x, y, z, timestamp)
 	    cclog("didAccelerate %f, %f, %f, %f", x, y, z, timestamp)
+	    cc.Director:getInstance():getRunningScene():getPhysicsWorld():setGravity(cc.p(x * 1000, y * 1000))
 	end
 
 	layer:registerScriptAccelerateHandler(didAccelerate)
