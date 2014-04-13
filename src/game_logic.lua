@@ -1,10 +1,14 @@
+-- Author: Hua Liang[Stupid ET] <et@everet.org>
+
 require "Cocos2d"
 require "Cocos2dConstants"
 require "util"
+require "map"
+
 
 function game_main()
     local schedulerID = 0
-    
+
     local visibleSize = cc.Director:getInstance():getVisibleSize()
     local origin = cc.Director:getInstance():getVisibleOrigin()
 
@@ -55,7 +59,18 @@ function game_main()
 	    ball:setPosition(point)
 	    layer:addChild(ball)
 	end
-	
+
+	local function createMap()
+	    local walls = {
+		{pt=cc.p(100, 320), sz=cc.size(10, 300)},
+		{pt=cc.p(700, 200), sz=cc.size(200, 20)},
+			  }
+	    for idx, value in ipairs(walls) do
+		local wall = gmap.makeWall(cc.p(value.pt.x + origin.x, value.pt.y + origin.y), value.sz)
+		layer:addChild(wall)
+	    end
+	end
+
 	local function onEnter()
 	    local function onTouchEnded(touch, event)
 		local location = touch:getLocation()
@@ -71,12 +86,14 @@ function game_main()
 	    local node = cc.Node:create()
 	    node:setPhysicsBody(cc.PhysicsBody:createEdgeBox(cc.size(VisibleRect:getVisibleRect().width, VisibleRect:getVisibleRect().height)))
 	    node:setPosition(VisibleRect:center())
-	    
+	    layer:addChild(node)
+
 	    log.debug("origin x " .. VisibleRect:center().x .. " y " .. VisibleRect:center().y)
 	    log.debug("rect width " .. VisibleRect:getVisibleRect().width .. " height " .. VisibleRect:getVisibleRect().height)
 	    log.debug("visibleSize rect width " .. visibleSize.width .. " height " .. visibleSize.height)
 
-	    layer:addChild(node)
+	    createMap()
+
 	end
 
 	local function onNodeEvent(event)
@@ -104,7 +121,7 @@ function game_main()
     sceneGame:getPhysicsWorld():setGravity(cc.p(-98,-98 * 2))
     -- sceneGame:addChild(creatDog())
     sceneGame:addChild(createPhysicsDemo())
-    
+
     if cc.Director:getInstance():getRunningScene() then
         cc.Director:getInstance():replaceScene(sceneGame)
     else
@@ -112,6 +129,6 @@ function game_main()
     end
 
     local debug = true
-    sceneGame:getPhysicsWorld():setDebugDrawMask(debug and cc.PhysicsWorld.DEBUGDRAW_ALL or cc.PhysicsWorld.DEBUGDRAW_NONE)	
-    
+    sceneGame:getPhysicsWorld():setDebugDrawMask(debug and cc.PhysicsWorld.DEBUGDRAW_ALL or cc.PhysicsWorld.DEBUGDRAW_NONE)
+
 end

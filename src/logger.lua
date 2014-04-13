@@ -1,3 +1,4 @@
+-- Author: Hua Liang[Stupid ET] <et@everet.org>
 
 log = log or {}
 
@@ -14,4 +15,3 @@ end
 function log.error(...)
     print("[ERROR] " .. string.format(...))
 end
-
