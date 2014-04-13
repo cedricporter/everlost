@@ -57,3 +57,4 @@ Resources/contacts.json
 runtime/ios/everlostlua iOS.app.dSYM/
 runtime/ios/everlostlua.app/
 frameworks/cocos2d-x/tools/tolua/userconf.ini
+frameworks/runtime-src/proj.ios_mac/everlostlua.xcodeproj/project.xcworkspace/

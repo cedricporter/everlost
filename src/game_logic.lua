@@ -69,11 +69,12 @@ function game_main()
 	    eventDispatcher:addEventListenerWithSceneGraphPriority(touchListener, layer)
 
 	    local node = cc.Node:create()
-	    node:setPhysicsBody(cc.PhysicsBody:createEdgeBox(cc.size(visibleSize.width, visibleSize.height)))
-	    node:setPosition(origin.x + visibleSize.width / 2, origin.y + visibleSize.height / 2)
+	    node:setPhysicsBody(cc.PhysicsBody:createEdgeBox(cc.size(VisibleRect:getVisibleRect().width, VisibleRect:getVisibleRect().height)))
+	    node:setPosition(VisibleRect:center())
 	    
-	    cclog("origin x " .. origin.x .. " y " .. origin.y)
-	    cclog("visibleSize w " .. visibleSize.width .. " y " .. visibleSize.height)
+	    cclog("origin x " .. VisibleRect:center().x .. " y " .. VisibleRect:center().y)
+	    cclog("rect width " .. VisibleRect:getVisibleRect().width .. " height " .. VisibleRect:getVisibleRect().height)
+	    cclog("visibleSize rect width " .. visibleSize.width .. " height " .. visibleSize.height)
 
 	    layer:addChild(node)
 	end
