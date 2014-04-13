@@ -86,6 +86,14 @@ function game_main()
 
 	layer:registerScriptHandler(onNodeEvent)
 
+	layer:setAccelerometerEnabled(true)
+
+	local function didAccelerate(x, y, z, timestamp)
+	    cclog("didAccelerate %f, %f, %f, %f", x, y, z, timestamp)
+	end
+
+	layer:registerScriptAccelerateHandler(didAccelerate)
+
 	return layer
     end
 
