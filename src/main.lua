@@ -18,6 +18,8 @@ local function main()
     cc.FileUtils:getInstance():addSearchResolutionsOrder("res");
 
     require "util"
+    require "map"
+    require "framework.init"
     
     --support debug
     local targetPlatform = cc.Application:getInstance():getTargetPlatform()
@@ -31,8 +33,12 @@ local function main()
 
     ---------------
 
-    require "game_logic"
-    game_main()
+    local sceneGame = import("scenes.BallDemoScene").new()
+    if cc.Director:getInstance():getRunningScene() then
+        cc.Director:getInstance():replaceScene(sceneGame)
+    else
+        cc.Director:getInstance():runWithScene(sceneGame)
+    end
 
 end
 
