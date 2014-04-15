@@ -40,6 +40,7 @@ bool AppDelegate::applicationDidFinishLaunching()
     auto pStack = engine->getLuaStack();
     
     std::string path = FileUtils::getInstance()->fullPathForFilename("src/main.lua");
+    FileUtils::getInstance()->addSearchPath("src");
     
     size_t pos;
     while ((pos = path.find_first_of("\\")) != std::string::npos)
