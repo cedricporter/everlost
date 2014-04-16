@@ -31,13 +31,14 @@ local function main()
     end
 
     ---------------
+    require("app.MyApp").new():run()
 
-    local sceneGame = import("scenes.BallDemoScene").new()
-    if cc.Director:getInstance():getRunningScene() then
-        cc.Director:getInstance():replaceScene(sceneGame)
-    else
-        cc.Director:getInstance():runWithScene(sceneGame)
-    end
+    -- local sceneGame = import("scenes.BallDemoScene").new()
+    -- if cc.Director:getInstance():getRunningScene() then
+    --     cc.Director:getInstance():replaceScene(sceneGame)
+    -- else
+    --     cc.Director:getInstance():runWithScene(sceneGame)
+    -- end
 
 end
 
