@@ -24,11 +24,10 @@ local function main()
     --support debug
     local targetPlatform = cc.Application:getInstance():getTargetPlatform()
     if (cc.PLATFORM_OS_IPHONE == targetPlatform) or (cc.PLATFORM_OS_IPAD == targetPlatform) or 
-        (cc.PLATFORM_OS_ANDROID == targetPlatform) or (cc.PLATFORM_OS_WINDOWS == targetPlatform) or
-    (cc.PLATFORM_OS_MAC == targetPlatform) then
+       (cc.PLATFORM_OS_ANDROID == targetPlatform) or (cc.PLATFORM_OS_WINDOWS == targetPlatform) or
+       (cc.PLATFORM_OS_MAC == targetPlatform) then
         log.info("result is ")
         --require('debugger')()
-        
     end
 
     ---------------
