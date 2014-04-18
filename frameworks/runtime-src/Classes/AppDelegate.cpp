@@ -23,7 +23,7 @@ bool AppDelegate::applicationDidFinishLaunching()
     auto director = Director::getInstance();
 	auto glview = director->getOpenGLView();
 	if(!glview) {
-		glview = GLView::createWithRect("everlostlua", Rect(0,0,900,640));
+		glview = GLView::createWithRect("everlost", Rect(0,0,900,640));
 		director->setOpenGLView(glview);
 	}
 
@@ -35,8 +35,8 @@ bool AppDelegate::applicationDidFinishLaunching()
     // set FPS. the default value is 1.0/60 if you don't call this
     director->setAnimationInterval(1.0 / 60);
 
-	auto engine = LuaEngine::getInstance();  
-	ScriptEngineManager::getInstance()->setScriptEngine(engine);
+    auto engine = LuaEngine::getInstance();  
+    ScriptEngineManager::getInstance()->setScriptEngine(engine);
     auto pStack = engine->getLuaStack();
     
     std::string path = FileUtils::getInstance()->fullPathForFilename("src/main.lua");
@@ -65,7 +65,7 @@ bool AppDelegate::applicationDidFinishLaunching()
     env.append("\"");
     engine->executeString(env.c_str());
     
-	engine->executeScriptFile(path.c_str());
+    engine->executeScriptFile(path.c_str());
 
     return true;
 }

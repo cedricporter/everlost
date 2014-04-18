@@ -1,5 +1,5 @@
 //
-// Prefix header for all source files of the 'everlostlua' target in the 'everlostlua' project
+// Prefix header for all source files of the 'everlost' target in the 'everlost' project
 //
 
 #ifdef __OBJC__
