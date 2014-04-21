@@ -18,7 +18,7 @@ function RectBoyScene:ctor()
         local function onTouchEnded(touch, event)
             local location = touch:getLocation()
             local x, y = layer.boy:getPosition()
-            layer.boy:setPosition(x + 10, y)
+            layer.boy:setPositionY(y + 50)
         end
 
         local touchListener = cc.EventListenerTouchOneByOne:create()
@@ -30,29 +30,50 @@ function RectBoyScene:ctor()
 
     local function createRectBoy()
         local textureBoy = cc.Director:getInstance():getTextureCache():addImage("boy.png")
-        local rect = cc.rect(0, 0, 512, 512)
+        local rect = cc.rect(0, 0, 40, 40)
         local frame0 = cc.SpriteFrame:createWithTexture(textureBoy, rect)
-        rect = cc.rect(512, 0, 512, 512)
+        rect = cc.rect(40, 0, 40, 40)
         local frame1 = cc.SpriteFrame:createWithTexture(textureBoy, rect)
         
         local spriteBoy = cc.Sprite:createWithSpriteFrame(frame0)
         local size = spriteBoy:getContentSize()
-        spriteBoy:setScale(40 / size.width, 40 / size.height)
 
         local animation = cc.Animation:createWithSpriteFrames({frame0,frame1}, 0.1)
         local animate = cc.Animate:create(animation);
         spriteBoy:runAction(cc.RepeatForever:create(animate))
 
         spriteBoy:setPosition(origin.x + visibleSize.width / 2, origin.y + visibleSize.height / 4 * 3)
+        spriteBoy.speed = 0
 
-        layer:addChild(spriteBoy)
-
-        layer.boy = spriteBoy
+        return spriteBoy
     end
     
     local function onEnter()
         bindEvent()
-        createRectBoy()
+        local boy = createRectBoy()
+        layer:addChild(boy)
+        layer.boy = boy
+
+        local function tick(dt)
+            local scale = 10
+            local g = 9.8 * scale
+            local x, y = boy:getPosition()
+            local size = boy:getContentSize()
+            local lowest = origin.y + size.height / 2
+            local t = dt
+            local distance = boy.speed * t
+            boy.speed = boy.speed + g * t
+            if y < lowest then
+                y = lowest
+                boy.speed = 0
+            else
+                y = y - distance
+            end
+
+            boy:setPositionY(y)
+        end
+
+        schedulerID = cc.Director:getInstance():getScheduler():scheduleScriptFunc(tick, 0, false)        
     end
 
     local function onNodeEvent(event)
