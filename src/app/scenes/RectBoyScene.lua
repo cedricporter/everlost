@@ -19,6 +19,7 @@ function RectBoyScene:ctor()
             local location = touch:getLocation()
             local x, y = layer.boy:getPosition()
             layer.boy:setPositionY(y + 50)
+            layer.boy.speed = 0
         end
 
         local touchListener = cc.EventListenerTouchOneByOne:create()
