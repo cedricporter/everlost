@@ -14,7 +14,21 @@ function RectBoyScene:ctor()
 
     local layer = cc.LayerColor:create(cc.c4b(255, 255, 255, 255))
 
-    local function onEnter()
+    local function bindEvent()
+        local function onTouchEnded(touch, event)
+            local location = touch:getLocation()
+            local x, y = layer.boy:getPosition()
+            layer.boy:setPosition(x + 10, y)
+        end
+
+        local touchListener = cc.EventListenerTouchOneByOne:create()
+        touchListener:registerScriptHandler(function() return true end, cc.Handler.EVENT_TOUCH_BEGAN)
+        touchListener:registerScriptHandler(onTouchEnded, cc.Handler.EVENT_TOUCH_ENDED)
+        local eventDispatcher = layer:getEventDispatcher()
+        eventDispatcher:addEventListenerWithSceneGraphPriority(touchListener, layer)
+    end
+
+    local function createRectBoy()
         local textureBoy = cc.Director:getInstance():getTextureCache():addImage("boy.png")
         local rect = cc.rect(0, 0, 512, 512)
         local frame0 = cc.SpriteFrame:createWithTexture(textureBoy, rect)
@@ -32,7 +46,13 @@ function RectBoyScene:ctor()
         spriteBoy:setPosition(origin.x + visibleSize.width / 2, origin.y + visibleSize.height / 4 * 3)
 
         layer:addChild(spriteBoy)
-        
+
+        layer.boy = spriteBoy
+    end
+    
+    local function onEnter()
+        bindEvent()
+        createRectBoy()
     end
 
     local function onNodeEvent(event)
