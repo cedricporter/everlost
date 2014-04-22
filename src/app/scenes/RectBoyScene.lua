@@ -19,7 +19,8 @@ function RectBoyScene:ctor()
     local function bindEvent()
         local function onTouchEnded(touch, event)
             local location = touch:getLocation()
-            layer.boy:getPhysicsBody():applyImpulse(cc.p(0, 9800 * 4))
+            -- layer.boy:getPhysicsBody():applyImpulse(cc.p(0, 9800 * 4))
+            layer.boy:getPhysicsBody():setVelocity(cc.p(0, 400))
         end
 
         local touchListener = cc.EventListenerTouchOneByOne:create()
