@@ -31,6 +31,9 @@ local function main()
     end
 
     ---------------
+    config = require("app.config")
+    config.debug = true
+    
     require("app.MyApp").new():run()
 
     -- local sceneGame = import("scenes.BallDemoScene").new()

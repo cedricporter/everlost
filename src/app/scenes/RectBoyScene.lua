@@ -4,8 +4,7 @@ local RectBoyScene = class("RectBoyScene", function()
     local scene = cc.Scene:createWithPhysics()                            
     scene.name = "RectBoyScene"
     scene:getPhysicsWorld():setGravity(cc.p(0, 0))
-    local debug = true
-    scene:getPhysicsWorld():setDebugDrawMask(debug and cc.PhysicsWorld.DEBUGDRAW_ALL or cc.PhysicsWorld.DEBUGDRAW_NONE)    
+    scene:getPhysicsWorld():setDebugDrawMask(config.debug and cc.PhysicsWorld.DEBUGDRAW_ALL or cc.PhysicsWorld.DEBUGDRAW_NONE)    
     return scene
 end)
 
