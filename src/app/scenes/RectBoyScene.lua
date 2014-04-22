@@ -1,8 +1,11 @@
 -- Author: Hua Liang[Stupid ET] <et@everet.org>
 
 local RectBoyScene = class("RectBoyScene", function()
-    local scene = cc.Scene:create()                            
+    local scene = cc.Scene:createWithPhysics()                            
     scene.name = "RectBoyScene"
+    scene:getPhysicsWorld():setGravity(cc.p(0, 0))
+    local debug = true
+    scene:getPhysicsWorld():setDebugDrawMask(debug and cc.PhysicsWorld.DEBUGDRAW_ALL or cc.PhysicsWorld.DEBUGDRAW_NONE)    
     return scene
 end)
 
@@ -17,9 +20,7 @@ function RectBoyScene:ctor()
     local function bindEvent()
         local function onTouchEnded(touch, event)
             local location = touch:getLocation()
-            local x, y = layer.boy:getPosition()
-            layer.boy:setPositionY(y + 50)
-            layer.boy.speed = 0
+            layer.boy:getPhysicsBody():applyImpulse(cc.p(0, 9800 * 4))
         end
 
         local touchListener = cc.EventListenerTouchOneByOne:create()
@@ -45,6 +46,12 @@ function RectBoyScene:ctor()
 
         spriteBoy:setPosition(origin.x + visibleSize.width / 2, origin.y + visibleSize.height / 4 * 3)
         spriteBoy.speed = 0
+        
+        local body = cc.PhysicsBody:createBox(spriteBoy:getContentSize())
+        body:applyForce(cc.p(0, -98000))
+        body:setRotationEnable(false)
+        body:setVelocity(cc.p(100, 0))
+        spriteBoy:setPhysicsBody(body)
 
         return spriteBoy
     end
@@ -55,26 +62,10 @@ function RectBoyScene:ctor()
         layer:addChild(boy)
         layer.boy = boy
 
-        local function tick(dt)
-            local scale = 10
-            local g = 9.8 * scale
-            local x, y = boy:getPosition()
-            local size = boy:getContentSize()
-            local lowest = origin.y + size.height / 2
-            local t = dt
-            local distance = boy.speed * t
-            boy.speed = boy.speed + g * t
-            if y < lowest then
-                y = lowest
-                boy.speed = 0
-            else
-                y = y - distance
-            end
-
-            boy:setPositionY(y)
-        end
-
-        schedulerID = cc.Director:getInstance():getScheduler():scheduleScriptFunc(tick, 0, false)        
+        local node = cc.Node:create()
+        node:setPhysicsBody(cc.PhysicsBody:createEdgeBox(cc.size(VisibleRect:getVisibleRect().width, VisibleRect:getVisibleRect().height)))
+        node:setPosition(VisibleRect:center())
+        layer:addChild(node)
     end
 
     local function onNodeEvent(event)
