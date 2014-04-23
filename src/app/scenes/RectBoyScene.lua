@@ -52,6 +52,7 @@ function RectBoyScene:ctor()
         body:setRotationEnable(false)
         body:setVelocity(cc.p(100, 0))
         spriteBoy:setPhysicsBody(body)
+        spriteBoy.body = body
 
         return spriteBoy
     end
@@ -62,18 +63,31 @@ function RectBoyScene:ctor()
         layer:addChild(boy)
         layer.boy = boy
 
-        local node = cc.Node:create()
-        node:setPhysicsBody(cc.PhysicsBody:createEdgeSegment(cc.p(0, 0), cc.p(20000, 0)))
-        node:setPosition(cc.p(origin.x - 10000, origin.y + 100))
-        layer:addChild(node)
-
-        for i = 0, 100 do
-            local node = cc.Node:create()
-            node:setPhysicsBody(cc.PhysicsBody:createEdgeSegment(cc.p(0, 0), cc.p(100, 0)))
-            node:setPosition(cc.p(origin.x + math.random(0, 10000), origin.y + 200 + math.random(0, 200)))
+        local groundNode = cc.Node:create()
+        groundNode:setPhysicsBody(cc.PhysicsBody:createEdgeSegment(cc.p(0, 0), cc.p(20000, 0)))
+        groundNode:setPosition(cc.p(origin.x - 10000, origin.y + 100))
+        layer:addChild(groundNode)
+        
+        local voidNode = cc.ParallaxNode:create()
+        for i = 0, 30 do
+            local node = cc.Sprite:create("crop.png")
+            -- node:setPhysicsBody(cc.PhysicsBody:createEdgeSegment(cc.p(0, 0), cc.p(100, 0)))
+            node:setPosition(cc.p(math.random(0, 10000), 200 + math.random(0, 200)))
+            -- node:setPosition(cc.p(100, 100))
+            -- voidNode:addChild(node, 1, cc.p(0, 0), cc.p(0, 0))
             layer:addChild(node)
         end
+
+        local function cameraFollow()
+            -- log.debug("p.x %f, %f", voidNode:getPosition())
+            layer:runAction(cc.MoveBy:create(0, cc.p(-1, 0)))
+            -- groundLayer:setPositionX(groundLayer:getPositionX() - 1)
+            -- layer.boy:runAction(cc.MoveBy:create(0, cc.p(1, 0)))
+        end
         
+        layer:addChild(voidNode)
+        
+        local schedulerID = cc.Director:getInstance():getScheduler():scheduleScriptFunc(cameraFollow, 0, false)
     end
 
     local function onNodeEvent(event)
