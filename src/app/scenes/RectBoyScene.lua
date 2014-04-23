@@ -63,9 +63,17 @@ function RectBoyScene:ctor()
         layer.boy = boy
 
         local node = cc.Node:create()
-        node:setPhysicsBody(cc.PhysicsBody:createEdgeBox(cc.size(VisibleRect:getVisibleRect().width, VisibleRect:getVisibleRect().height)))
-        node:setPosition(VisibleRect:center())
+        node:setPhysicsBody(cc.PhysicsBody:createEdgeSegment(cc.p(0, 0), cc.p(20000, 0)))
+        node:setPosition(cc.p(origin.x - 10000, origin.y + 100))
         layer:addChild(node)
+
+        for i = 0, 100 do
+            local node = cc.Node:create()
+            node:setPhysicsBody(cc.PhysicsBody:createEdgeSegment(cc.p(0, 0), cc.p(100, 0)))
+            node:setPosition(cc.p(origin.x + math.random(0, 10000), origin.y + 200 + math.random(0, 200)))
+            layer:addChild(node)
+        end
+        
     end
 
     local function onNodeEvent(event)
