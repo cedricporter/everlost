@@ -68,19 +68,24 @@ function RectBoyScene:ctor()
         groundNode:setPosition(cc.p(origin.x - 10000, origin.y + 100))
         layer:addChild(groundNode)
         
-        local voidNode = cc.ParallaxNode:create()
-        for i = 0, 30 do
-            local node = cc.Sprite:create("crop.png")
-            -- node:setPhysicsBody(cc.PhysicsBody:createEdgeSegment(cc.p(0, 0), cc.p(100, 0)))
-            node:setPosition(cc.p(math.random(0, 10000), 200 + math.random(0, 200)))
-            -- node:setPosition(cc.p(100, 100))
+        local voidNode = cc.Node:create()
+        local groundList = {}
+        for i = 0, 100 do
+            local node = cc.Node:create()
+            node:setPhysicsBody(cc.PhysicsBody:createEdgeSegment(cc.p(0, 0), cc.p(100, 0)))
+            node:setPosition(cc.p(math.random(0, 5000), 200 + math.random(10, 200)))
             -- voidNode:addChild(node, 1, cc.p(0, 0), cc.p(0, 0))
             layer:addChild(node)
+            groundList[#groundList + 1] = node
         end
 
         local function cameraFollow()
             -- log.debug("p.x %f, %f", voidNode:getPosition())
-            layer:runAction(cc.MoveBy:create(0, cc.p(-1, 0)))
+            -- layer:runAction(cc.MoveBy:create(0, cc.p(-1, 0)))
+            for idx, gd in ipairs(groundList) do
+                gd:runAction(cc.MoveBy:create(0, cc.p(-1, 0)))
+            end
+                
             -- groundLayer:setPositionX(groundLayer:getPositionX() - 1)
             -- layer.boy:runAction(cc.MoveBy:create(0, cc.p(1, 0)))
         end
