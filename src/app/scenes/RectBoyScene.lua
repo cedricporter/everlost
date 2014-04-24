@@ -73,30 +73,33 @@ function RectBoyScene:ctor()
         layer:addChild(groundNode)
         
 
-        local function tick()
+        local function gameLogic()
+            -- groundNode:setRotation(math.random(-10, 10))
+            
+            local obstacleNum = 10
             for idx, child in ipairs(layer:getChildren()) do
                 log.debug("child %s", idx)
-                if child:getTag() ~= kTagGround and child:getPositionX() < 0 then
+                if child:getTag() ~= kTagGround and child:getPositionX() < -child:getContentSize().width then
                     child:removeFromParent()
                 end
             end
 
-            if #layer:getChildren() < 8 then
-                for i = 0, 10 do
+            if #layer:getChildren() < obstacleNum then
+                local speed = 5
+                for i = 0, obstacleNum - #layer:getChildren() do
                     local node = cc.Sprite:create("blank.png")
                     node:setTextureRect(cc.rect(0, 0, 100, 5))
                     node:setColor(cc.c3b(255, 255, 255))
                     node:setPhysicsBody(cc.PhysicsBody:createEdgeSegment(cc.p(-50, 0), cc.p(50, 0)))
-                    local startX = layer.boy:getPositionX()
-                    node:setPosition(cc.p(math.random(startX, startX + 1000), 200 + math.random(10, 400)))
-                    node:runAction(cc.RepeatForever:create(cc.MoveBy:create(0, cc.p(-1, 0))))
+                    node:setPosition(cc.p(math.random(origin.x + visibleSize.width, origin.x + visibleSize.width * 1.5), 200 + math.random(10, 400)))
+                    node:runAction(cc.RepeatForever:create(cc.MoveBy:create(0, cc.p(-speed, 0))))
                     layer:addChild(node)
                 end
             end
             
         end
         
-        local schedulerID = cc.Director:getInstance():getScheduler():scheduleScriptFunc(tick, 0, false)
+        local schedulerID = cc.Director:getInstance():getScheduler():scheduleScriptFunc(gameLogic, 0, false)
     end
 
     local function onNodeEvent(event)
