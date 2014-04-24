@@ -14,7 +14,7 @@ function RectBoyScene:ctor()
     local visibleSize = cc.Director:getInstance():getVisibleSize()
     local origin = cc.Director:getInstance():getVisibleOrigin()
 
-    local layer = cc.LayerColor:create(cc.c4b(255, 255, 255, 255))
+    local layer = cc.LayerColor:create(cc.c4b(100, 100, 100, 255))
 
     local function bindEvent()
         local function onTouchEnded(touch, event)
@@ -71,8 +71,10 @@ function RectBoyScene:ctor()
         local voidNode = cc.Node:create()
         local groundList = {}
         for i = 0, 100 do
-            local node = cc.Node:create()
-            node:setPhysicsBody(cc.PhysicsBody:createEdgeSegment(cc.p(0, 0), cc.p(100, 0)))
+            local node = cc.Sprite:create("blank.png")
+            node:setTextureRect(cc.rect(0, 0, 100, 5))
+            node:setColor(cc.c3b(255, 255, 255))
+            node:setPhysicsBody(cc.PhysicsBody:createEdgeSegment(cc.p(-50, 0), cc.p(50, 0)))
             node:setPosition(cc.p(math.random(0, 5000), 200 + math.random(10, 200)))
             -- voidNode:addChild(node, 1, cc.p(0, 0), cc.p(0, 0))
             layer:addChild(node)
