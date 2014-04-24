@@ -10,6 +10,7 @@ end)
 
 function RectBoyScene:ctor()
     local schedulerID = 0
+    local kTagGround = 100
 
     local visibleSize = cc.Director:getInstance():getVisibleSize()
     local origin = cc.Director:getInstance():getVisibleOrigin()
@@ -48,7 +49,7 @@ function RectBoyScene:ctor()
         spriteBoy.speed = 0
         
         local body = cc.PhysicsBody:createBox(spriteBoy:getContentSize())
-        body:applyForce(cc.p(0, -98000))
+        body:applyForce(cc.p(0, -98000 * 1.2))
         body:setRotationEnable(false)
         body:setVelocity(cc.p(100, 0))
         spriteBoy:setPhysicsBody(body)
@@ -63,38 +64,39 @@ function RectBoyScene:ctor()
         layer:addChild(boy)
         layer.boy = boy
 
-        local groundNode = cc.Node:create()
-        groundNode:setPhysicsBody(cc.PhysicsBody:createEdgeSegment(cc.p(0, 0), cc.p(20000, 0)))
-        groundNode:setPosition(cc.p(origin.x - 10000, origin.y + 100))
+        local groundNode = cc.Sprite:create("blank.png")
+        groundNode:setTextureRect(cc.rect(0, 0, 3000, 5))
+        groundNode:setColor(cc.c3b(255, 255, 255))
+        groundNode:setTag(kTagGround)
+        groundNode:setPhysicsBody(cc.PhysicsBody:createEdgeSegment(cc.p(-1500, 0), cc.p(1500, 0)))
+        groundNode:setPosition(cc.p(origin.x + visibleSize.width / 2, origin.y + 100))
         layer:addChild(groundNode)
         
-        local voidNode = cc.Node:create()
-        local groundList = {}
-        for i = 0, 100 do
-            local node = cc.Sprite:create("blank.png")
-            node:setTextureRect(cc.rect(0, 0, 100, 5))
-            node:setColor(cc.c3b(255, 255, 255))
-            node:setPhysicsBody(cc.PhysicsBody:createEdgeSegment(cc.p(-50, 0), cc.p(50, 0)))
-            node:setPosition(cc.p(math.random(0, 5000), 200 + math.random(10, 200)))
-            -- voidNode:addChild(node, 1, cc.p(0, 0), cc.p(0, 0))
-            layer:addChild(node)
-            groundList[#groundList + 1] = node
-        end
 
-        local function cameraFollow()
-            -- log.debug("p.x %f, %f", voidNode:getPosition())
-            -- layer:runAction(cc.MoveBy:create(0, cc.p(-1, 0)))
-            for idx, gd in ipairs(groundList) do
-                gd:runAction(cc.MoveBy:create(0, cc.p(-1, 0)))
+        local function tick()
+            for idx, child in ipairs(layer:getChildren()) do
+                log.debug("child %s", idx)
+                if child:getTag() ~= kTagGround and child:getPositionX() < 0 then
+                    child:removeFromParent()
+                end
             end
-                
-            -- groundLayer:setPositionX(groundLayer:getPositionX() - 1)
-            -- layer.boy:runAction(cc.MoveBy:create(0, cc.p(1, 0)))
+
+            if #layer:getChildren() < 8 then
+                for i = 0, 10 do
+                    local node = cc.Sprite:create("blank.png")
+                    node:setTextureRect(cc.rect(0, 0, 100, 5))
+                    node:setColor(cc.c3b(255, 255, 255))
+                    node:setPhysicsBody(cc.PhysicsBody:createEdgeSegment(cc.p(-50, 0), cc.p(50, 0)))
+                    local startX = layer.boy:getPositionX()
+                    node:setPosition(cc.p(math.random(startX, startX + 1000), 200 + math.random(10, 400)))
+                    node:runAction(cc.RepeatForever:create(cc.MoveBy:create(0, cc.p(-1, 0))))
+                    layer:addChild(node)
+                end
+            end
+            
         end
         
-        layer:addChild(voidNode)
-        
-        local schedulerID = cc.Director:getInstance():getScheduler():scheduleScriptFunc(cameraFollow, 0, false)
+        local schedulerID = cc.Director:getInstance():getScheduler():scheduleScriptFunc(tick, 0, false)
     end
 
     local function onNodeEvent(event)
