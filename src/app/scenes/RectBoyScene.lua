@@ -51,6 +51,7 @@ function RectBoyScene:ctor()
         local body = cc.PhysicsBody:createBox(spriteBoy:getContentSize())
         body:applyForce(cc.p(0, -98000 * 1.2))
         body:setRotationEnable(false)
+        body:setContactTestBitmask(1)
         body:setVelocity(cc.p(100, 0))
         spriteBoy:setPhysicsBody(body)
         spriteBoy.body = body
@@ -70,15 +71,15 @@ function RectBoyScene:ctor()
         groundNode:setTag(kTagGround)
         groundNode:setPhysicsBody(cc.PhysicsBody:createEdgeSegment(cc.p(-1500, 0), cc.p(1500, 0)))
         groundNode:setPosition(cc.p(origin.x + visibleSize.width / 2, origin.y + 100))
+        groundNode:getPhysicsBody():setContactTestBitmask(1)
         layer:addChild(groundNode)
         
 
-        local function gameLogic()
+        local function update()
             -- groundNode:setRotation(math.random(-10, 10))
             
             local obstacleNum = 10
             for idx, child in ipairs(layer:getChildren()) do
-                log.debug("child %s", idx)
                 if child:getTag() ~= kTagGround and child:getPositionX() < -child:getContentSize().width then
                     child:removeFromParent()
                 end
@@ -99,7 +100,21 @@ function RectBoyScene:ctor()
             
         end
         
-        local schedulerID = cc.Director:getInstance():getScheduler():scheduleScriptFunc(gameLogic, 0, false)
+        local schedulerID = cc.Director:getInstance():getScheduler():scheduleScriptFunc(update, 0, false)
+
+        log.debug("try register contact")
+        local function onContactBegin(contact)
+            -- return contact:getContactData().normal.y < 0;
+            log.debug("on contact")
+            return true
+        end
+        
+        local contactListener = cc.EventListenerPhysicsContactWithBodies:create(boy:getPhysicsBody(), groundNode:getPhysicsBody())
+        -- local contactListener = cc.EventListenerPhysicsContact:create()
+        contactListener:registerScriptHandler(onContactBegin, cc.Handler.EVENT_PHYSICS_CONTACT_BEGIN)
+        local eventDispatcher = layer:getEventDispatcher()
+        eventDispatcher:addEventListenerWithSceneGraphPriority(contactListener, layer)
+    
     end
 
     local function onNodeEvent(event)
