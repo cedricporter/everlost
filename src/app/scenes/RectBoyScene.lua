@@ -11,6 +11,7 @@ end)
 function RectBoyScene:ctor()
     local schedulerID = 0
     local kTagGround = 100
+    local score = 0
 
     local visibleSize = cc.Director:getInstance():getVisibleSize()
     local origin = cc.Director:getInstance():getVisibleOrigin()
@@ -61,6 +62,12 @@ function RectBoyScene:ctor()
     
     local function onEnter()
         bindEvent()
+        
+        local scoreLabel = cc.Label:create("0000", "arial.ttf", 32)
+        layer:addChild(scoreLabel, 1)
+        scoreLabel:setAnchorPoint(cc.p(0.5, 0.5))
+        scoreLabel:setPosition( cc.p(VisibleRect:center().x, VisibleRect:top().y - 50) )
+        
         local boy = createRectBoy()
         layer:addChild(boy)
         layer.boy = boy
@@ -106,6 +113,8 @@ function RectBoyScene:ctor()
         local function onContactBegin(contact)
             -- return contact:getContactData().normal.y < 0;
             log.debug("on contact")
+            score = score + 1
+            scoreLabel:setString(score)
             return true
         end
         
