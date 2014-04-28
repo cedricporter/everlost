@@ -11,6 +11,8 @@ end)
 function RectBoyScene:ctor()
     local schedulerID = 0
     local kTagGround = 100
+    local kRectBoy = 101
+    local kPlatform = 102
     local score = 0
 
     local visibleSize = cc.Director:getInstance():getVisibleSize()
@@ -45,6 +47,7 @@ function RectBoyScene:ctor()
         local animation = cc.Animation:createWithSpriteFrames({frame0,frame1}, 0.1)
         local animate = cc.Animate:create(animation);
         spriteBoy:runAction(cc.RepeatForever:create(animate))
+        spriteBoy:setTag(kRectBoy)
 
         spriteBoy:setPosition(origin.x + visibleSize.width / 2, origin.y + visibleSize.height / 4 * 3)
         spriteBoy.speed = 0
@@ -80,7 +83,6 @@ function RectBoyScene:ctor()
         groundNode:setPosition(cc.p(origin.x + visibleSize.width / 2, origin.y + 100))
         groundNode:getPhysicsBody():setContactTestBitmask(1)
         layer:addChild(groundNode)
-        
 
         local function update()
             -- groundNode:setRotation(math.random(-10, 10))
@@ -96,9 +98,11 @@ function RectBoyScene:ctor()
                 local speed = 5
                 for i = 0, obstacleNum - #layer:getChildren() do
                     local node = cc.Sprite:create("blank.png")
+                    node:setTag(kPlatform)
                     node:setTextureRect(cc.rect(0, 0, 100, 5))
                     node:setColor(cc.c3b(255, 255, 255))
                     node:setPhysicsBody(cc.PhysicsBody:createEdgeSegment(cc.p(-50, 0), cc.p(50, 0)))
+                    node:getPhysicsBody():setContactTestBitmask(1)
                     node:setPosition(cc.p(math.random(origin.x + visibleSize.width, origin.x + visibleSize.width * 1.5), 200 + math.random(10, 400)))
                     node:runAction(cc.RepeatForever:create(cc.MoveBy:create(0, cc.p(-speed, 0))))
                     layer:addChild(node)
@@ -111,15 +115,20 @@ function RectBoyScene:ctor()
 
         log.debug("try register contact")
         local function onContactBegin(contact)
-            -- return contact:getContactData().normal.y < 0;
-            log.debug("on contact")
-            score = score + 1
-            scoreLabel:setString(score)
+            nodeA = contact:getShapeA():getBody():getNode()
+            nodeB = contact:getShapeB():getBody():getNode()
+
+            -- log.debug(contact:getContactData().normal)
+
+            if nodeB:getTag() == kRectBoy and nodeA:getTag() == kPlatform and contact:getContactData().normal.y > 0 then
+                score = score + 1
+                scoreLabel:setString(score)
+            end
             return true
         end
         
-        local contactListener = cc.EventListenerPhysicsContactWithBodies:create(boy:getPhysicsBody(), groundNode:getPhysicsBody())
-        -- local contactListener = cc.EventListenerPhysicsContact:create()
+        -- local contactListener = cc.EventListenerPhysicsContactWithBodies:create(boy:getPhysicsBody(), groundNode:getPhysicsBody())
+        local contactListener = cc.EventListenerPhysicsContact:create()
         contactListener:registerScriptHandler(onContactBegin, cc.Handler.EVENT_PHYSICS_CONTACT_BEGIN)
         local eventDispatcher = layer:getEventDispatcher()
         eventDispatcher:addEventListenerWithSceneGraphPriority(contactListener, layer)
