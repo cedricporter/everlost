@@ -123,6 +123,18 @@ function RectBoyScene:ctor()
             if nodeB:getTag() == kRectBoy and nodeA:getTag() == kPlatform and contact:getContactData().normal.y > 0 then
                 score = score + 1
                 scoreLabel:setString(score)
+                x, y = nodeB:getPosition()
+                
+                local score = cc.Label:create("+1", "arial.ttf", 32)
+                layer:addChild(score)
+                score:setPosition(cc.p(x, y))
+                
+                local function removeSelf(node)
+                    node:removeFromParent()
+                end
+                score:runAction(cc.Sequence:create(cc.MoveBy:create(1, cc.p(0, 100)) ,cc.CallFunc:create(removeSelf)))
+    
+                
             end
             return true
         end
