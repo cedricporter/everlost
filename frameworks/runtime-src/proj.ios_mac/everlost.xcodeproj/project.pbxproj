@@ -593,7 +593,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = F293B6C415EB7BEA00256477 /* Build configuration list for PBXNativeTarget "everlost iOS" */;
 			buildPhases = (
-				DAD2DA2C1905504800F47A95 /* ShellScript */,
+				DAB5CED4191004F800FA733E /* ShellScript */,
 				F293B3C415EB7BE500256477 /* Sources */,
 				F293B3C515EB7BE500256477 /* Frameworks */,
 				F293B3C615EB7BE500256477 /* Resources */,
@@ -816,7 +816,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		DAD2DA2C1905504800F47A95 /* ShellScript */ = {
+		DAB5CED4191004F800FA733E /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -827,7 +827,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "touch -cm ${SRCROOT}/../../../res/\ntouch -cm ${SRCROOT}/../../../src/";
+			shellScript = "touch -cm ${SRCROOT}/../../res";
 		};
 /* End PBXShellScriptBuildPhase section */
 

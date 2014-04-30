@@ -5,19 +5,19 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>3440A102-52B7-4846-9959-1DFC39A93071</string>
+	<string>138DF674-2EBC-4B23-8AAD-8443B455F583</string>
 	<key>IDESourceControlProjectName</key>
 	<string>everlost</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>718A0448-1F40-4A48-BD47-4FFEF808FFF3</key>
+		<key>F38A841D-94C4-42AA-B7BD-14090062F337</key>
 		<string>ssh://github.com/cedricporter/everlost.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>frameworks/runtime-src/proj.ios_mac/everlost.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>718A0448-1F40-4A48-BD47-4FFEF808FFF3</key>
+		<key>F38A841D-94C4-42AA-B7BD-14090062F337</key>
 		<string>../../../../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
@@ -25,14 +25,14 @@
 	<key>IDESourceControlProjectVersion</key>
 	<integer>110</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>718A0448-1F40-4A48-BD47-4FFEF808FFF3</string>
+	<string>F38A841D-94C4-42AA-B7BD-14090062F337</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>718A0448-1F40-4A48-BD47-4FFEF808FFF3</string>
+			<string>F38A841D-94C4-42AA-B7BD-14090062F337</string>
 			<key>IDESourceControlWCCName</key>
 			<string>everlost</string>
 		</dict>

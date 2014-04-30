@@ -35,7 +35,7 @@ bool AppDelegate::applicationDidFinishLaunching()
     // set FPS. the default value is 1.0/60 if you don't call this
     director->setAnimationInterval(1.0 / 60);
 
-    auto engine = LuaEngine::getInstance();  
+    auto engine = LuaEngine::getInstance();
     ScriptEngineManager::getInstance()->setScriptEngine(engine);
     auto pStack = engine->getLuaStack();
     
@@ -52,21 +52,21 @@ bool AppDelegate::applicationDidFinishLaunching()
     {
         const string dir = path.substr(0, p);
         pStack->addSearchPath(dir.c_str());
-
+        
         p = dir.find_last_of("/\\");
         if (p != dir.npos)
         {
             pStack->addSearchPath(dir.substr(0, p).c_str());
         }
     }
-
+    
     string env = "__LUA_STARTUP_FILE__=\"";
     env.append(path);
     env.append("\"");
     engine->executeString(env.c_str());
     
     engine->executeScriptFile(path.c_str());
-
+    
     return true;
 }
 

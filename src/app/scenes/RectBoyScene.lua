@@ -133,7 +133,6 @@ function RectBoyScene:ctor()
                     node:removeFromParent()
                 end
                 score:runAction(cc.Sequence:create(cc.MoveBy:create(1, cc.p(0, 100)) ,cc.CallFunc:create(removeSelf)))
-    
                 
             end
             return true
