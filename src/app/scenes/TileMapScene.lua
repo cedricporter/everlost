@@ -28,6 +28,7 @@ function TileMapScene:ctor()
 
         local animation = cc.Animation:createWithSpriteFrames({frame0,frame1}, 0.1)
         local animate = cc.Animate:create(animation)
+        spriteBoy:setScale(32/40, 32/40)
         spriteBoy:runAction(cc.RepeatForever:create(animate))
         spriteBoy:setTag(kRectBoy)
 
@@ -45,11 +46,12 @@ function TileMapScene:ctor()
         
         x = (x - offsetX) / map:getTileSize().width
         y = (map:getMapSize().height * map:getTileSize().height - (y - offsetY)) / map:getTileSize().height
-        return math.floor(x), math.floor(y)
+        return math.floor(x), math.ceil(y)
     end
 
+    local stop = false
     local function update(delta)
-        local g = 98
+        local g = 9.8
         local x, y = boy:getPosition()
         boy.speed = boy.speed + g * delta
         
@@ -57,9 +59,13 @@ function TileMapScene:ctor()
         local boyX, boyY = x, y
         local mapOffsetY = 0
 
+        if stop then return end
+
         -- x, y = x - boy:getContentSize().width / 2, y - boy:getContentSize().height / 2
         tileX, tileY = getTilePos(cc.p(x, y))
+        log.debug("x,y (%s, %s)", x, y)
         log.debug("pos (%s, %s)", tileX, tileY)
+        log.debug("map (%s, %s)", map:getPositionX(), map:getPositionY())
 
         if boyY < 200 then
             mapOffsetY = boy:getPositionY() - boyY
@@ -76,6 +82,8 @@ function TileMapScene:ctor()
                     collision = prop["Collidable"]
                     log.debug("collision: %s", collision)
                     if collision then
+                        boy.speed = 0
+                        stop = true
                         return
                     end
                 end
@@ -95,7 +103,7 @@ function TileMapScene:ctor()
         -- metaLayer:setVisible(false)
 
         map:setPosition(origin.x - (map:getMapSize().width * map:getTileSize().width - visibleSize.width) / 2 + boy:getContentSize().width / 2,
-                        origin.y - (map:getMapSize().height * map:getTileSize().height - visibleSize.height) / 2 + boy:getContentSize().height / 2)
+                        origin.y - (map:getMapSize().height * map:getTileSize().height - visibleSize.height) / 2)
         
         layer:addChild(map, 0, kTagTileMap)
         -- map:runAction(cc.Sequence:create(cc.MoveBy:create(10, cc.p(0, -1200)), cc.MoveBy:create(10, cc.p(0, 1200))))
