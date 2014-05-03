@@ -827,7 +827,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "touch -cm ${SRCROOT}/../../../res/";
+			shellScript = "touch -cm ${SRCROOT}/../../../src/\ntouch -cm ${SRCROOT}/../../../res/";
 		};
 /* End PBXShellScriptBuildPhase section */
 

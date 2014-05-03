@@ -16,6 +16,7 @@ local function main()
     collectgarbage("setstepmul", 5000)
     cc.FileUtils:getInstance():addSearchResolutionsOrder("src");
     cc.FileUtils:getInstance():addSearchResolutionsOrder("res");
+    cc.FileUtils:getInstance():addSearchResolutionsOrder("res/tmap");
 
     require "util"
     require "map"
