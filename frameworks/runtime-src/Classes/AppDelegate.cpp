@@ -3,6 +3,8 @@
 #include "SimpleAudioEngine.h"
 #include "cocos2d.h"
 
+#include "TestMapScene.h"
+
 using namespace CocosDenshion;
 
 USING_NS_CC;
@@ -34,6 +36,13 @@ bool AppDelegate::applicationDidFinishLaunching()
 
     // set FPS. the default value is 1.0/60 if you don't call this
     director->setAnimationInterval(1.0 / 60);
+    
+//    FileUtils::getInstance()->addSearchPath("res");
+//    auto scene = Scene::create();
+//    scene->addChild(TestMapScene::create());
+//    director->runWithScene(scene);
+//    
+//    return true;
 
     auto engine = LuaEngine::getInstance();
     ScriptEngineManager::getInstance()->setScriptEngine(engine);

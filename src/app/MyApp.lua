@@ -9,7 +9,8 @@ end
 function MyApp:run()
     -- self:enterBallDemoScene()
     -- self:enterRectBoyScene()
-    self:enterTileMapScene()
+    -- self:enterTileMapScene()
+    self:enterTileMap2Scene()
 end
 
 function MyApp:enterBallDemoScene()
@@ -22,6 +23,10 @@ end
 
 function MyApp:enterTileMapScene()
     self:enterScene("TileMapScene", nil, "fade", 0.6, nil)
+end
+
+function MyApp:enterTileMap2Scene()
+    self:enterScene("TileMap2Scene", nil, "fade", 0.6, nil)
 end
 
 return MyApp

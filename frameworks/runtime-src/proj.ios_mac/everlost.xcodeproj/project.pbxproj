@@ -94,6 +94,8 @@
 		C03781F618BF65B100FE4F13 /* libluabindings iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C03781B618BF654500FE4F13 /* libluabindings iOS.a */; };
 		C06E23C418CEF9740093C81A /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C06E23C318CEF9740093C81A /* main.cpp */; };
 		D6B061351803AC000077942B /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6B061341803AC000077942B /* CoreMotion.framework */; };
+		DA7888DB1915483B008F12D3 /* TestMapScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DA7888D91915483B008F12D3 /* TestMapScene.cpp */; };
+		DA7888DC1915483B008F12D3 /* TestMapScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DA7888D91915483B008F12D3 /* TestMapScene.cpp */; };
 		F293B3CD15EB7BE500256477 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F293B3CC15EB7BE500256477 /* QuartzCore.framework */; };
 		F293B3D115EB7BE500256477 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F293B3D015EB7BE500256477 /* OpenAL.framework */; };
 		F293B3D315EB7BE500256477 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F293B3D215EB7BE500256477 /* AudioToolbox.framework */; };
@@ -334,6 +336,8 @@
 		C03781CE18BF656A00FE4F13 /* StudioConstants.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = StudioConstants.lua; path = "../../cocos2d-x/cocos/scripting/lua-bindings/script/StudioConstants.lua"; sourceTree = "<group>"; };
 		C06E23C318CEF9740093C81A /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		D6B061341803AC000077942B /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.0.sdk/System/Library/Frameworks/CoreMotion.framework; sourceTree = DEVELOPER_DIR; };
+		DA7888D91915483B008F12D3 /* TestMapScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TestMapScene.cpp; path = ../Classes/TestMapScene.cpp; sourceTree = "<group>"; };
+		DA7888DA1915483B008F12D3 /* TestMapScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TestMapScene.h; path = ../Classes/TestMapScene.h; sourceTree = "<group>"; };
 		F293B3C815EB7BE500256477 /* everlost iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "everlost iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F293B3CC15EB7BE500256477 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		F293B3CE15EB7BE500256477 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -547,6 +551,8 @@
 		F293BB7C15EB830F00256477 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				DA7888D91915483B008F12D3 /* TestMapScene.cpp */,
+				DA7888DA1915483B008F12D3 /* TestMapScene.h */,
 				F293BB7E15EB831F00256477 /* AppDelegate.cpp */,
 				F293BB7F15EB831F00256477 /* AppDelegate.h */,
 			);
@@ -836,6 +842,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DA7888DC1915483B008F12D3 /* TestMapScene.cpp in Sources */,
 				C06E23C418CEF9740093C81A /* main.cpp in Sources */,
 				5023813317EBBCE400990C9B /* AppDelegate.cpp in Sources */,
 			);
@@ -847,6 +854,7 @@
 			files = (
 				5023812517EBBCAC00990C9B /* RootViewController.mm in Sources */,
 				F293BB9C15EB831F00256477 /* AppDelegate.cpp in Sources */,
+				DA7888DB1915483B008F12D3 /* TestMapScene.cpp in Sources */,
 				5023812417EBBCAC00990C9B /* main.m in Sources */,
 				5023811817EBBCAC00990C9B /* AppController.mm in Sources */,
 			);
