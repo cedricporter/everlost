@@ -32,8 +32,6 @@ bool TestMapScene::init()
         auto map = TMXTiledMap::create("map1.tmx");
         this->addChild(map, 0, 101);
         auto metaLayer = map->getLayer("Meta");
-        metaLayer->getTiles();
-        map->getObjectGroup("meta");
         
         ret = true;
     } while (0);

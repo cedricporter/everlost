@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" width="200" height="20" tilewidth="32" tileheight="32">
+<map version="1.0" orientation="orthogonal" width="5" height="5" tilewidth="32" tileheight="32">
  <tileset firstgid="1" name="tmw_desert_spacing" tilewidth="32" tileheight="32" spacing="1" margin="1">
   <image source="tmw_desert_spacing.png" width="265" height="199"/>
  </tileset>
@@ -11,14 +11,19 @@
    </properties>
   </tile>
  </tileset>
- <layer name="Terrain" width="200" height="20">
+ <layer name="regions" width="5" height="5">
   <data encoding="base64" compression="zlib">
-   eJzt1bEJACAMAMHUKd1/WPsgpgoo3MHP8BEAAAAAAAAAADBjlQDgxCsA6HgFADf5eAAAv9kbygJF
+   eJxjYMAO5HCI4wL41AMADJQAPQ==
   </data>
  </layer>
- <layer name="Collision" width="200" height="20">
+ <layer name="input_Terrain" width="5" height="5">
   <data encoding="base64" compression="zlib">
-   eJzt2MEJADAIBEFbSv/N+ZcQX4KBGdgaDi4CAAAAAAAAAABmnBIA3NgKADq2AoCX+kFtCwDgNwlptAmT
+   eJxjYMAOuHCI4wJCeOQABVQAHQ==
+  </data>
+ </layer>
+ <layer name="output_Collision" width="5" height="5">
+  <data encoding="base64" compression="zlib">
+   eJxjYMAODHGI4wL41AMAFEwAYw==
   </data>
  </layer>
 </map>
