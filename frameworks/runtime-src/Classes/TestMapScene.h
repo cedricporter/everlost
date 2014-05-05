@@ -15,6 +15,7 @@ namespace cocos2d {
     class TestMapScene : public Layer
     {
     public:
+        static Scene* createScene();
         virtual bool init();
         
         CREATE_FUNC(TestMapScene);

@@ -60,3 +60,4 @@ frameworks/cocos2d-x/tools/tolua/userconf.ini
 frameworks/runtime-src/proj.ios_mac/everlostlua.xcodeproj/project.xcworkspace/
 frameworks/runtime-src/proj.ios_mac/everlostlua.xcodeproj/xcuserdata/
 frameworks/runtime-src/proj.ios_mac/everlost.xcodeproj/xcuserdata/
+*.xcuserdatad/
