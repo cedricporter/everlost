@@ -71,6 +71,31 @@ bool TestMapScene::init()
             }
         }
         
+        auto touchListner = EventListenerTouchOneByOne::create();
+        bool touchMoved = false;
+        touchListner->onTouchBegan = [this, &touchMoved](Touch* touch, Event* event) -> bool
+        {
+            touchMoved = true;
+            return true;
+        };
+        touchListner->onTouchMoved = [this, body, &touchMoved](Touch* touch, Event* event)
+        {
+            if (touchMoved)
+            {
+                auto location = touch->getLocation();
+                
+                auto offset = location - body->getPosition();
+                
+                body->applyForce(Vect(offset.x * 100, offset.y * 100));
+            }
+        };
+        touchListner->onTouchEnded = [this, &touchMoved](Touch* touch, Event* event)
+        {
+            touchMoved = false;
+        };
+        _eventDispatcher->addEventListenerWithSceneGraphPriority(touchListner, this);
+        
+        
         ret = true;
     } while (0);
     return ret;
