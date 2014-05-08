@@ -12,12 +12,22 @@
 #include "cocos2d.h"
 
 namespace cocos2d {
-    class TestMapScene : public Layer
+    class BackgroundLayer : public Layer
+    {
+    public:
+        virtual bool init();
+        
+        void runLogic(float delta);
+        
+        CREATE_FUNC(BackgroundLayer);
+    };
+    
+    
+    class TestMapScene : public Node
     {
     public:
         static Scene* createScene();
-        virtual bool init();
-        
+            
         CREATE_FUNC(TestMapScene);
     };
 } // end of namespace cocos2d

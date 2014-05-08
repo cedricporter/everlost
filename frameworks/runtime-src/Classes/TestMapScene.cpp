@@ -16,14 +16,14 @@ Scene* TestMapScene::createScene()
     auto scene = Scene::createWithPhysics();
     scene->getPhysicsWorld()->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
     
-    auto layer = TestMapScene::create();
+    auto layer = BackgroundLayer::create();
     scene->addChild(layer);
     
     return scene;
 }
 
 
-bool TestMapScene::init()
+bool BackgroundLayer::init()
 {
     bool ret = false;
     do {
@@ -86,7 +86,7 @@ bool TestMapScene::init()
                 
                 auto offset = location - body->getPosition();
                 
-                body->applyForce(Vect(offset.x * 100, offset.y * 100));
+                body->applyImpulse(Vect(offset.x * 100, offset.y * 100));
             }
         };
         touchListner->onTouchEnded = [this, &touchMoved](Touch* touch, Event* event)
@@ -95,8 +95,15 @@ bool TestMapScene::init()
         };
         _eventDispatcher->addEventListenerWithSceneGraphPriority(touchListner, this);
         
+        schedule(schedule_selector(BackgroundLayer::runLogic), 0);
         
         ret = true;
     } while (0);
     return ret;
+}
+
+
+void BackgroundLayer::runLogic(float delta)
+{
+    log("%f", delta);
 }

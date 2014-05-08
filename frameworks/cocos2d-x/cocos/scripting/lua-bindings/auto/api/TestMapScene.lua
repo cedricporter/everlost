@@ -1,13 +1,8 @@
 
 --------------------------------
 -- @module TestMapScene
--- @extend Layer
+-- @extend Node
 
---------------------------------
--- @function [parent=#TestMapScene] init 
--- @param self
--- @return bool#bool ret (return value: bool)
-        
 --------------------------------
 -- @function [parent=#TestMapScene] create 
 -- @param self
