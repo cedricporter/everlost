@@ -16,10 +16,70 @@ Scene* TestMapScene::createScene()
     auto scene = Scene::createWithPhysics();
     scene->getPhysicsWorld()->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
     
-    auto layer = BackgroundLayer::create();
-    scene->addChild(layer);
+    auto backgroundLayer = BackgroundLayer::create();
+    scene->addChild(backgroundLayer);
+    
+    auto playerLayer = HeroLayer::create();
+    scene->addChild(playerLayer);
     
     return scene;
+}
+
+
+bool HeroLayer::init()
+{
+    _isTouching = false;
+    
+    bool ret = false;
+    do {
+        CC_BREAK_IF(!Layer::init());
+        
+        Size visibleSize = Director::getInstance()->getVisibleSize();
+        Point origin = Director::getInstance()->getVisibleOrigin();
+        
+        auto node = Sprite::create("close.png");
+        _hero = node;
+        CC_BREAK_IF(!node);
+        auto body = PhysicsBody::createCircle(node->getContentSize().width / 2);
+        node->setPhysicsBody(body);
+        
+        node->setPosition(Point(origin.x + visibleSize.width / 2, origin.y + visibleSize.height / 2));
+        this->addChild(node);
+        
+        auto touchListner = EventListenerTouchOneByOne::create();
+        touchListner->onTouchBegan = [this](Touch* touch, Event* event) -> bool
+        {
+            this->_isTouching = true;
+            return true;
+        };
+        touchListner->onTouchMoved = [this](Touch* touch, Event* event)
+        {
+            if (this->_isTouching)
+            {
+                auto body = this->_hero->getPhysicsBody();
+                auto location = touch->getLocation();
+                auto offset = location - body->getPosition();
+                
+                body->applyImpulse(Vect(offset.x * 100, offset.y * 100));
+            }
+        };
+        touchListner->onTouchEnded = [this](Touch* touch, Event* event)
+        {
+            this->_isTouching = false;
+        };
+        _eventDispatcher->addEventListenerWithSceneGraphPriority(touchListner, this);
+        
+        schedule(schedule_selector(HeroLayer::runLogic), 0);
+        
+        ret = true;
+    } while (0);
+return ret;
+}
+
+
+void HeroLayer::runLogic(float delta)
+{
+    log("H %f", delta);
 }
 
 
@@ -31,14 +91,6 @@ bool BackgroundLayer::init()
         
         Size visibleSize = Director::getInstance()->getVisibleSize();
         Point origin = Director::getInstance()->getVisibleOrigin();
-        
-        auto node = Sprite::create("close.png");
-        CC_BREAK_IF(!node);
-        auto body = PhysicsBody::createCircle(node->getContentSize().width / 2);
-        node->setPhysicsBody(body);
-        
-        node->setPosition(Point(origin.x + visibleSize.width / 2, origin.y + visibleSize.height / 2));
-        this->addChild(node);
         
         auto map = TMXTiledMap::create("map1.tmx");
         map->setPosition(origin.x - map->getTileSize().width / 2, origin.y + map->getTileSize().height / 2);
@@ -71,30 +123,6 @@ bool BackgroundLayer::init()
             }
         }
         
-        auto touchListner = EventListenerTouchOneByOne::create();
-        bool touchMoved = false;
-        touchListner->onTouchBegan = [this, &touchMoved](Touch* touch, Event* event) -> bool
-        {
-            touchMoved = true;
-            return true;
-        };
-        touchListner->onTouchMoved = [this, body, &touchMoved](Touch* touch, Event* event)
-        {
-            if (touchMoved)
-            {
-                auto location = touch->getLocation();
-                
-                auto offset = location - body->getPosition();
-                
-                body->applyImpulse(Vect(offset.x * 100, offset.y * 100));
-            }
-        };
-        touchListner->onTouchEnded = [this, &touchMoved](Touch* touch, Event* event)
-        {
-            touchMoved = false;
-        };
-        _eventDispatcher->addEventListenerWithSceneGraphPriority(touchListner, this);
-        
         schedule(schedule_selector(BackgroundLayer::runLogic), 0);
         
         ret = true;
@@ -105,5 +133,5 @@ bool BackgroundLayer::init()
 
 void BackgroundLayer::runLogic(float delta)
 {
-    log("%f", delta);
+    log("B %f", delta);
 }

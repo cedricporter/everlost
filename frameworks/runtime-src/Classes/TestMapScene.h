@@ -23,6 +23,21 @@ namespace cocos2d {
     };
     
     
+    class HeroLayer : public Layer
+    {
+    protected:
+        bool _isTouching;
+        Sprite *_hero;
+        
+    public:
+        virtual bool init();
+        
+        void runLogic(float delta);
+        
+        CREATE_FUNC(HeroLayer);
+    };
+    
+    
     class TestMapScene : public Node
     {
     public:
