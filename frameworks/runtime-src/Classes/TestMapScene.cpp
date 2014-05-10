@@ -11,25 +11,40 @@
 USING_NS_CC;
 
 
-Scene* TestMapScene::createScene()
+bool TestMapScene::init()
 {
-    auto scene = Scene::createWithPhysics();
-    scene->getPhysicsWorld()->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
+    bool ret = false;
+    do {
+        CC_BREAK_IF(! initWithPhysics());
+        getPhysicsWorld()->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
+        
+        int zOrder = 0;
+        
+        _backgroundLayer = BackgroundLayer::create();
+        CC_BREAK_IF(!_backgroundLayer);
+        addChild(_backgroundLayer, zOrder++);
+        
+        _terrianLayer = TerrianLayer::create();
+        CC_BREAK_IF(!_terrianLayer);
+        addChild(_terrianLayer, zOrder++);
+        
+        _heroLayer = HeroLayer::create();
+        CC_BREAK_IF(!_heroLayer);
+        addChild(_heroLayer, zOrder++);
+        
+        _touchLayer = TouchLayer::create();
+        CC_BREAK_IF(!_touchLayer);
+        addChild(_touchLayer, zOrder++);
+        
+        ret = true;
+    } while (0);
     
-    auto backgroundLayer = BackgroundLayer::create();
-    scene->addChild(backgroundLayer);
-    
-    auto playerLayer = HeroLayer::create();
-    scene->addChild(playerLayer);
-    
-    return scene;
+    return ret;
 }
 
 
 bool HeroLayer::init()
 {
-    _isTouching = false;
-    
     bool ret = false;
     do {
         CC_BREAK_IF(!Layer::init());
@@ -46,44 +61,41 @@ bool HeroLayer::init()
         node->setPosition(Point(origin.x + visibleSize.width / 2, origin.y + visibleSize.height / 2));
         this->addChild(node);
         
-        auto touchListner = EventListenerTouchOneByOne::create();
-        touchListner->onTouchBegan = [this](Touch* touch, Event* event) -> bool
-        {
-            this->_isTouching = true;
-            return true;
-        };
-        touchListner->onTouchMoved = [this](Touch* touch, Event* event)
-        {
-            if (this->_isTouching)
-            {
+        schedule(schedule_selector(HeroLayer::runLogic), 0);
+        
+        auto listener = EventListenerCustom::create("touchMove", [this](EventCustom* event) {
+            Touch* touch = static_cast<Touch*>(event->getUserData());
                 auto body = this->_hero->getPhysicsBody();
                 auto location = touch->getLocation();
                 auto offset = location - body->getPosition();
-                
+            
                 body->applyImpulse(Vect(offset.x * 100, offset.y * 100));
-            }
-        };
-        touchListner->onTouchEnded = [this](Touch* touch, Event* event)
-        {
-            this->_isTouching = false;
-        };
-        _eventDispatcher->addEventListenerWithSceneGraphPriority(touchListner, this);
-        
-        schedule(schedule_selector(HeroLayer::runLogic), 0);
+        });
+        _eventDispatcher->addEventListenerWithFixedPriority(listener, 1);
         
         ret = true;
     } while (0);
-return ret;
+    return ret;
 }
 
 
 void HeroLayer::runLogic(float delta)
 {
-    log("H %f", delta);
 }
 
 
 bool BackgroundLayer::init()
+{
+    return Layer::init();
+}
+
+
+void BackgroundLayer::runLogic(float delta)
+{
+}
+
+
+bool TerrianLayer::init()
 {
     bool ret = false;
     do {
@@ -131,7 +143,40 @@ bool BackgroundLayer::init()
 }
 
 
-void BackgroundLayer::runLogic(float delta)
+
+TouchLayer::TouchLayer()
+: _isTouching(false)
 {
-    log("B %f", delta);
+}
+
+
+bool TouchLayer::init()
+{
+    bool ret = false;
+    do {
+        
+        auto touchListner = EventListenerTouchOneByOne::create();
+        touchListner->onTouchBegan = [this](Touch* touch, Event* event) -> bool
+        {
+            this->_isTouching = true;
+            return true;
+        };
+        touchListner->onTouchMoved = [this](Touch* touch, Event* event)
+        {
+            if (this->_isTouching)
+            {
+                EventCustom ev("touchMove");
+                ev.setUserData(touch);
+                _eventDispatcher->dispatchEvent(&ev);
+            }
+        };
+        touchListner->onTouchEnded = [this](Touch* touch, Event* event)
+        {
+            this->_isTouching = false;
+        };
+        _eventDispatcher->addEventListenerWithSceneGraphPriority(touchListner, this);
+        
+        ret = true;
+    } while (0);
+    return Layer::init();
 }

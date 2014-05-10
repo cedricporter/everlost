@@ -26,7 +26,6 @@ namespace cocos2d {
     class HeroLayer : public Layer
     {
     protected:
-        bool _isTouching;
         Sprite *_hero;
         
     public:
@@ -38,12 +37,42 @@ namespace cocos2d {
     };
     
     
-    class TestMapScene : public Node
+    class TerrianLayer : public Layer
     {
     public:
-        static Scene* createScene();
+        virtual bool init();
+        
+        CREATE_FUNC(TerrianLayer);
+    };
+    
+    
+    class TouchLayer : public Layer
+    {
+    public:
+        virtual bool init();
+        
+        CREATE_FUNC(TouchLayer);
+        
+    protected:
+        bool _isTouching;
+        
+CC_CONSTRUCTOR_ACCESS:
+        TouchLayer();
+    };
+    
+    
+    class TestMapScene : public Scene
+    {
+    public:
+        virtual bool init();
             
         CREATE_FUNC(TestMapScene);
+        
+    protected:
+        HeroLayer* _heroLayer;
+        BackgroundLayer* _backgroundLayer;
+        TerrianLayer* _terrianLayer;
+        TouchLayer* _touchLayer;
     };
 } // end of namespace cocos2d
 
