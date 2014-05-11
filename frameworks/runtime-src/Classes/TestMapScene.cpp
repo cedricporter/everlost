@@ -7,6 +7,7 @@
 //
 
 #include "TestMapScene.h"
+#include "EventDef.h"
 
 USING_NS_CC;
 
@@ -15,8 +16,9 @@ bool TestMapScene::init()
 {
     bool ret = false;
     do {
-        CC_BREAK_IF(! initWithPhysics());
-        getPhysicsWorld()->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
+//        CC_BREAK_IF(! initWithPhysics());
+//        getPhysicsWorld()->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
+//        getPhysicsWorld()->setGravity(Vect(0, 0));
         
         int zOrder = 0;
         
@@ -36,10 +38,30 @@ bool TestMapScene::init()
         CC_BREAK_IF(!_touchLayer);
         addChild(_touchLayer, zOrder++);
         
+        schedule(schedule_selector(TestMapScene::runLogic));
+        
         ret = true;
     } while (0);
     
     return ret;
+}
+
+
+void TestMapScene::runLogic(float delta)
+{
+    Size visibleSize = Director::getInstance()->getVisibleSize();
+    Point origin = Director::getInstance()->getVisibleOrigin();
+    
+    auto hero = _heroLayer->getHero();
+    auto heroPt = hero->getPosition();
+    
+    auto middlePt = Point(origin.x + visibleSize.width / 2, origin.y + visibleSize.height / 2);
+    auto offset = middlePt - heroPt;
+    
+//    log("offset %f %f", offset.x, offset.y);
+    
+    hero->setPosition(middlePt);
+    _terrianLayer->setPosition(_terrianLayer->getPosition() + offset);
 }
 
 
@@ -52,24 +74,20 @@ bool HeroLayer::init()
         Size visibleSize = Director::getInstance()->getVisibleSize();
         Point origin = Director::getInstance()->getVisibleOrigin();
         
-        auto node = Sprite::create("close.png");
-        _hero = node;
-        CC_BREAK_IF(!node);
-        auto body = PhysicsBody::createCircle(node->getContentSize().width / 2);
-        node->setPhysicsBody(body);
+        _hero = Sprite::create("close.png");
+        CC_BREAK_IF(!_hero);
+        auto body = PhysicsBody::createCircle(_hero->getContentSize().width / 2);
+        _hero->setPhysicsBody(body);
         
-        node->setPosition(Point(origin.x + visibleSize.width / 2, origin.y + visibleSize.height / 2));
-        this->addChild(node);
+        _hero->setPosition(Point(origin.x + visibleSize.width / 2, origin.y + visibleSize.height / 2));
+        this->addChild(_hero);
         
-        schedule(schedule_selector(HeroLayer::runLogic), 0);
-        
-        auto listener = EventListenerCustom::create("touchMove", [this](EventCustom* event) {
-            Touch* touch = static_cast<Touch*>(event->getUserData());
-                auto body = this->_hero->getPhysicsBody();
-                auto location = touch->getLocation();
-                auto offset = location - body->getPosition();
-            
-                body->applyImpulse(Vect(offset.x * 100, offset.y * 100));
+        auto listener = EventListenerCustom::create(CUSTOMEVENT_PRESS_MOVE_RIGHT_START, [this](EventCustom* event) {
+            this->moveHeroRight();
+        });
+        _eventDispatcher->addEventListenerWithFixedPriority(listener, 1);
+        listener = EventListenerCustom::create(CUSTOMEVENT_PRESS_MOVE_LEFT_START, [this](EventCustom* event) {
+            this->moveHeroLeft();
         });
         _eventDispatcher->addEventListenerWithFixedPriority(listener, 1);
         
@@ -78,6 +96,47 @@ bool HeroLayer::init()
     return ret;
 }
 
+
+bool HeroLayer::moveHero(cocos2d::Point &newPt)
+{
+    bool ret = false;
+    
+    EventHeroMove evHeroMove;
+    evHeroMove.originPoint = _hero->getPosition();
+    evHeroMove.newPoint = newPt;
+    evHeroMove.hero = _hero;
+    
+    _hero->runAction(MoveBy::create(0.3, evHeroMove.newPoint - evHeroMove.originPoint));
+    
+    EventCustom ev(CUSTOMEVENT_HERO_MOVE);
+    ev.setUserData(&evHeroMove);
+    _eventDispatcher->dispatchEvent(&ev);
+    
+    ret = true;
+    return ret;
+}
+
+
+bool HeroLayer::moveHeroLeft()
+{
+    auto pt = _hero->getPosition();
+    auto newPt = pt - Point(10, 0);
+    
+    moveHero(newPt);
+
+    return true;
+}
+
+
+bool HeroLayer::moveHeroRight()
+{
+    auto pt = _hero->getPosition();
+    auto newPt = pt + Point(10, 0);
+    
+    moveHero(newPt);
+
+    return true;
+}
 
 void HeroLayer::runLogic(float delta)
 {
@@ -124,7 +183,7 @@ bool TerrianLayer::init()
                 int y = i / collisionLayer->getLayerSize().width;
                 int x = i - y * collisionLayer->getLayerSize().width;
                 y = collisionLayer->getLayerSize().height - y;
-                log("(%d, %d), i %d", x, y, i);
+                log("(%d, %d), i %ld", x, y, i);
                 auto pt = Point(x * map->getTileSize().width, y * map->getTileSize().height);
                 node->setPosition(origin + pt);
                 log("pos (%f, %f)", node->getPosition().x, node->getPosition().y);
@@ -135,7 +194,11 @@ bool TerrianLayer::init()
             }
         }
         
-        schedule(schedule_selector(BackgroundLayer::runLogic), 0);
+//        auto listener = EventListenerCustom::create(CUSTOMEVENT_HERO_MOVE, [this](EventCustom* event) {
+//            EventHeroMove* ev = static_cast<EventHeroMove*>(event->getUserData());
+//            Point pt = this->getPosition() - (ev->newPoint - ev->originPoint);
+//        });
+//        _eventDispatcher->addEventListenerWithFixedPriority(listener, 1);
         
         ret = true;
     } while (0);
@@ -154,29 +217,55 @@ bool TouchLayer::init()
 {
     bool ret = false;
     do {
-        
         auto touchListner = EventListenerTouchOneByOne::create();
         touchListner->onTouchBegan = [this](Touch* touch, Event* event) -> bool
         {
-            this->_isTouching = true;
+            log("touch begin");
+            _touchStartPoint = touch->getLocation();
+            _isTouching = true;
             return true;
         };
         touchListner->onTouchMoved = [this](Touch* touch, Event* event)
         {
-            if (this->_isTouching)
-            {
-                EventCustom ev("touchMove");
-                ev.setUserData(touch);
-                _eventDispatcher->dispatchEvent(&ev);
-            }
+            _touchCurrentPoint = touch->getLocation();
         };
         touchListner->onTouchEnded = [this](Touch* touch, Event* event)
         {
-            this->_isTouching = false;
+            log("touch end");
+            _isTouching = false;
         };
         _eventDispatcher->addEventListenerWithSceneGraphPriority(touchListner, this);
+        
+        schedule(schedule_selector(TouchLayer::update));
         
         ret = true;
     } while (0);
     return Layer::init();
+}
+
+
+void TouchLayer::update(float delta)
+{
+    if (_isTouching)
+    {
+        auto vect = _touchCurrentPoint - _touchStartPoint;
+        EventCustom* ev;
+        if (abs(vect.x) >= abs(vect.y)) // horizon move
+        {
+            if (vect.x >= 0)
+            {
+                ev = new EventCustom(CUSTOMEVENT_PRESS_MOVE_RIGHT_START);
+            }
+            else
+            {
+                ev = new EventCustom(CUSTOMEVENT_PRESS_MOVE_LEFT_START);
+            }
+            _eventDispatcher->dispatchEvent(ev);
+            CC_SAFE_DELETE(ev);
+        }
+        else
+        {
+            
+        }
+    }
 }

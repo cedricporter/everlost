@@ -10,8 +10,10 @@
 #define __everlost__TestMapScene__
 
 #include "cocos2d.h"
+#include "ui/CocosGUI.h"
 
 namespace cocos2d {
+    
     class BackgroundLayer : public Layer
     {
     public:
@@ -26,13 +28,18 @@ namespace cocos2d {
     class HeroLayer : public Layer
     {
     protected:
-        Sprite *_hero;
+        bool moveHero(Point& newPt);
+        bool moveHeroRight();
+        bool moveHeroLeft();
+        bool jump();
         
     public:
         virtual bool init();
         
         void runLogic(float delta);
         
+        CC_SYNTHESIZE_READONLY(Sprite*, _hero, Hero);
+
         CREATE_FUNC(HeroLayer);
     };
     
@@ -53,8 +60,12 @@ namespace cocos2d {
         
         CREATE_FUNC(TouchLayer);
         
+        void update(float delta);
+        
     protected:
         bool _isTouching;
+        Point _touchStartPoint;
+        Point _touchCurrentPoint;
         
 CC_CONSTRUCTOR_ACCESS:
         TouchLayer();
@@ -73,6 +84,8 @@ CC_CONSTRUCTOR_ACCESS:
         BackgroundLayer* _backgroundLayer;
         TerrianLayer* _terrianLayer;
         TouchLayer* _touchLayer;
+        
+        void runLogic(float delta);
     };
 } // end of namespace cocos2d
 
