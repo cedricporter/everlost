@@ -4,7 +4,7 @@ local RectBoyScene = class("RectBoyScene", function()
     local scene = cc.Scene:createWithPhysics()                            
     scene.name = "RectBoyScene"
     scene:getPhysicsWorld():setGravity(cc.p(0, 0))
-    scene:getPhysicsWorld():setDebugDrawMask(config.debug and cc.PhysicsWorld.DEBUGDRAW_ALL or cc.PhysicsWorld.DEBUGDRAW_NONE)    
+    -- scene:getPhysicsWorld():setDebugDrawMask(config.debug and cc.PhysicsWorld.DEBUGDRAW_ALL or cc.PhysicsWorld.DEBUGDRAW_NONE)    
     return scene
 end)
 
@@ -22,6 +22,7 @@ function RectBoyScene:ctor()
     local layer = cc.LayerColor:create(cc.c4b(100, 100, 100, 255))
 
     local function bindEvent()
+
         local function onTouchEnded(touch, event)
             local location = touch:getLocation()
             -- layer.boy:getPhysicsBody():applyImpulse(cc.p(0, 9800 * 4))
@@ -66,8 +67,22 @@ function RectBoyScene:ctor()
     
     local function onEnter()
         bindEvent()
+
+        local function menuCallbackConfig(sender)
+            local eventDispatcher = self:getEventDispatcher()
+            local event = cc.EventCustom:new("showKamcord")
+            eventDispatcher:dispatchEvent(event)
+        end
+        local showKamcordBtn = cc.MenuItemFont:create("show kamcord")
+        showKamcordBtn:registerScriptTapHandler(menuCallbackConfig)
+        showKamcordBtn:setFontSizeObj(20)
+
+        local menu = cc.Menu:create()
+        menu:addChild(showKamcordBtn)
+        menu:setPosition(VisibleRect:center().x, VisibleRect:rightBottom().y + 50)
+        layer:addChild(menu, 3)
         
-        local scoreLabel = cc.Label:create("0000", "arial.ttf", 32)
+        local scoreLabel = cc.Label:create("0", "arial.ttf", 32)
         layer:addChild(scoreLabel, 1)
         scoreLabel:setAnchorPoint(cc.p(0.5, 0.5))
         scoreLabel:setPosition( cc.p(VisibleRect:center().x, VisibleRect:top().y - 50) )

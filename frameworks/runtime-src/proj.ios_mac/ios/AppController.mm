@@ -30,6 +30,7 @@
 #import "AppDelegate.h"
 #import "RootViewController.h"
 #import "CCEAGLView.h"
+#import <Kamcord/Kamcord.h>
 
 @implementation AppController
 
@@ -80,7 +81,16 @@ static AppDelegate s_sharedApplication;
     // IMPORTANT: Setting the GLView should be done after creating the RootViewController
     cocos2d::GLView *glview = cocos2d::GLView::createWithEAGLView(eaglView);
     cocos2d::Director::getInstance()->setOpenGLView(glview);
-
+    
+    // Tell Kamcord your developer key, secret, app name, and the parent view controller
+    // that will present the Kamcord UI.
+    [Kamcord setDeveloperKey:@"qA2MB6SNFyL10Npkz5cPjMJ7AwcN4tieaTeW4DlSOed"
+             developerSecret:@"qVvWnZ11vHOxOJU2dRIMhOmocL3p78soHHfErLy0cUC"
+                     appName:@"EverLost"
+        parentViewController:viewController];
+    
+    [Kamcord startRecording];
+    
     cocos2d::Application::getInstance()->run();
     return YES;
 }

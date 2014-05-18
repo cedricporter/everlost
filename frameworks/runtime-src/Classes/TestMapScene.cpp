@@ -74,7 +74,7 @@ bool HeroLayer::init()
         Size visibleSize = Director::getInstance()->getVisibleSize();
         Point origin = Director::getInstance()->getVisibleOrigin();
         
-        _hero = Sprite::create("close.png");
+        _hero = Sprite::create("boy.png");
         CC_BREAK_IF(!_hero);
         auto body = PhysicsBody::createCircle(_hero->getContentSize().width / 2);
         _hero->setPhysicsBody(body);

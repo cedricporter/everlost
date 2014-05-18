@@ -8,9 +8,9 @@ end
 
 function MyApp:run()
     -- self:enterBallDemoScene()
-    -- self:enterRectBoyScene()
+    self:enterRectBoyScene()
     -- self:enterTileMapScene()
-    self:enterTileMap2Scene()
+    -- self:enterTileMap2Scene()
 end
 
 function MyApp:enterBallDemoScene()

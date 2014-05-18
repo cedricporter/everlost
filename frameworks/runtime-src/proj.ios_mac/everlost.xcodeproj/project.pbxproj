@@ -30,7 +30,7 @@
 		5023812217EBBCAC00990C9B /* Icon-76.png in Resources */ = {isa = PBXBuildFile; fileRef = 5023811217EBBCAC00990C9B /* Icon-76.png */; };
 		5023812417EBBCAC00990C9B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5023811417EBBCAC00990C9B /* main.m */; };
 		5023812517EBBCAC00990C9B /* RootViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5023811717EBBCAC00990C9B /* RootViewController.mm */; };
-		5023813317EBBCE400990C9B /* AppDelegate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F293BB7E15EB831F00256477 /* AppDelegate.cpp */; };
+		5023813317EBBCE400990C9B /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = F293BB7E15EB831F00256477 /* AppDelegate.mm */; };
 		5023813717EBBCE400990C9B /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AF4C402178663F200122817 /* libz.dylib */; };
 		5023813E17EBBCE400990C9B /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F293B3CC15EB7BE500256477 /* QuartzCore.framework */; };
 		5023814017EBBCE400990C9B /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F293B3D015EB7BE500256477 /* OpenAL.framework */; };
@@ -96,13 +96,33 @@
 		D6B061351803AC000077942B /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6B061341803AC000077942B /* CoreMotion.framework */; };
 		DA7888DB1915483B008F12D3 /* TestMapScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DA7888D91915483B008F12D3 /* TestMapScene.cpp */; };
 		DA7888DC1915483B008F12D3 /* TestMapScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DA7888D91915483B008F12D3 /* TestMapScene.cpp */; };
+		DAAAE995192894E3007F8EB1 /* Kamcord.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DAAAE98F192894E3007F8EB1 /* Kamcord.framework */; };
+		DAAAE996192894E3007F8EB1 /* Kamcord.bundle in Resources */ = {isa = PBXBuildFile; fileRef = DAAAE991192894E3007F8EB1 /* Kamcord.bundle */; };
+		DAAAE997192894E3007F8EB1 /* KamcordiPad.storyboardc in Resources */ = {isa = PBXBuildFile; fileRef = DAAAE992192894E3007F8EB1 /* KamcordiPad.storyboardc */; };
+		DAAAE998192894E3007F8EB1 /* KamcordiPhone.storyboardc in Resources */ = {isa = PBXBuildFile; fileRef = DAAAE993192894E3007F8EB1 /* KamcordiPhone.storyboardc */; };
+		DAAAE999192894E3007F8EB1 /* KC_GTMOAuth2ViewTouch.nib in Resources */ = {isa = PBXBuildFile; fileRef = DAAAE994192894E3007F8EB1 /* KC_GTMOAuth2ViewTouch.nib */; };
+		DAAAE99D1928A8DA007F8EB1 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DAAAE99C1928A8DA007F8EB1 /* CoreMedia.framework */; };
+		DAAAE9A01928A8F6007F8EB1 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DAAAE99E1928A8F6007F8EB1 /* CoreText.framework */; };
+		DAAAE9A11928A8F6007F8EB1 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DAAAE99F1928A8F6007F8EB1 /* CoreVideo.framework */; };
+		DAAAE9A31928A906007F8EB1 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DAAAE9A21928A906007F8EB1 /* MediaPlayer.framework */; };
+		DAAAE9A51928A90C007F8EB1 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DAAAE9A41928A90C007F8EB1 /* MessageUI.framework */; };
+		DAAAE9A71928A91B007F8EB1 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DAAAE9A61928A91B007F8EB1 /* OpenGLES.framework */; };
+		DAAAE9A91928A92B007F8EB1 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DAAAE9A81928A92B007F8EB1 /* QuartzCore.framework */; };
+		DAAAE9AB1928A937007F8EB1 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DAAAE9AA1928A937007F8EB1 /* Security.framework */; };
+		DAAAE9AD1928A93F007F8EB1 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DAAAE9AC1928A93F007F8EB1 /* SystemConfiguration.framework */; };
+		DAAAE9AF1928A988007F8EB1 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DAAAE9AE1928A988007F8EB1 /* Accounts.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		DAAAE9B11928A998007F8EB1 /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DAAAE9B01928A998007F8EB1 /* CoreImage.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		DAAAE9B31928A9A3007F8EB1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DAAAE9B21928A9A3007F8EB1 /* Foundation.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		DAAAE9B51928A9AF007F8EB1 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DAAAE9B41928A9AF007F8EB1 /* Social.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		DAAAE9B71928A9C2007F8EB1 /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DAAAE9B61928A9C2007F8EB1 /* Twitter.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		DAAAE9B91928A9D0007F8EB1 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DAAAE9B81928A9D0007F8EB1 /* UIKit.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		F293B3CD15EB7BE500256477 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F293B3CC15EB7BE500256477 /* QuartzCore.framework */; };
 		F293B3D115EB7BE500256477 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F293B3D015EB7BE500256477 /* OpenAL.framework */; };
 		F293B3D315EB7BE500256477 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F293B3D215EB7BE500256477 /* AudioToolbox.framework */; };
 		F293B3D515EB7BE500256477 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F293B3D415EB7BE500256477 /* AVFoundation.framework */; };
 		F293B3D915EB7BE500256477 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F293B3D815EB7BE500256477 /* Foundation.framework */; };
 		F293B3DB15EB7BE500256477 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F293B3DA15EB7BE500256477 /* CoreGraphics.framework */; };
-		F293BB9C15EB831F00256477 /* AppDelegate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F293BB7E15EB831F00256477 /* AppDelegate.cpp */; };
+		F293BB9C15EB831F00256477 /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = F293BB7E15EB831F00256477 /* AppDelegate.mm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -339,6 +359,26 @@
 		DA7888D91915483B008F12D3 /* TestMapScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TestMapScene.cpp; path = ../Classes/TestMapScene.cpp; sourceTree = "<group>"; };
 		DA7888DA1915483B008F12D3 /* TestMapScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TestMapScene.h; path = ../Classes/TestMapScene.h; sourceTree = "<group>"; };
 		DA897781191E661500F2CF94 /* EventDef.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EventDef.h; path = ../Classes/EventDef.h; sourceTree = "<group>"; };
+		DAAAE98F192894E3007F8EB1 /* Kamcord.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Kamcord.framework; sourceTree = "<group>"; };
+		DAAAE991192894E3007F8EB1 /* Kamcord.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Kamcord.bundle; sourceTree = "<group>"; };
+		DAAAE992192894E3007F8EB1 /* KamcordiPad.storyboardc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = wrapper.storyboardc; path = KamcordiPad.storyboardc; sourceTree = "<group>"; };
+		DAAAE993192894E3007F8EB1 /* KamcordiPhone.storyboardc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = wrapper.storyboardc; path = KamcordiPhone.storyboardc; sourceTree = "<group>"; };
+		DAAAE994192894E3007F8EB1 /* KC_GTMOAuth2ViewTouch.nib */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = KC_GTMOAuth2ViewTouch.nib; sourceTree = "<group>"; };
+		DAAAE99C1928A8DA007F8EB1 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/CoreMedia.framework; sourceTree = DEVELOPER_DIR; };
+		DAAAE99E1928A8F6007F8EB1 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/CoreText.framework; sourceTree = DEVELOPER_DIR; };
+		DAAAE99F1928A8F6007F8EB1 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/CoreVideo.framework; sourceTree = DEVELOPER_DIR; };
+		DAAAE9A21928A906007F8EB1 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/MediaPlayer.framework; sourceTree = DEVELOPER_DIR; };
+		DAAAE9A41928A90C007F8EB1 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/MessageUI.framework; sourceTree = DEVELOPER_DIR; };
+		DAAAE9A61928A91B007F8EB1 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/OpenGLES.framework; sourceTree = DEVELOPER_DIR; };
+		DAAAE9A81928A92B007F8EB1 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/QuartzCore.framework; sourceTree = DEVELOPER_DIR; };
+		DAAAE9AA1928A937007F8EB1 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/Security.framework; sourceTree = DEVELOPER_DIR; };
+		DAAAE9AC1928A93F007F8EB1 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/SystemConfiguration.framework; sourceTree = DEVELOPER_DIR; };
+		DAAAE9AE1928A988007F8EB1 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/Accounts.framework; sourceTree = DEVELOPER_DIR; };
+		DAAAE9B01928A998007F8EB1 /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/CoreImage.framework; sourceTree = DEVELOPER_DIR; };
+		DAAAE9B21928A9A3007F8EB1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		DAAAE9B41928A9AF007F8EB1 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/Social.framework; sourceTree = DEVELOPER_DIR; };
+		DAAAE9B61928A9C2007F8EB1 /* Twitter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Twitter.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/Twitter.framework; sourceTree = DEVELOPER_DIR; };
+		DAAAE9B81928A9D0007F8EB1 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 		F293B3C815EB7BE500256477 /* everlost iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "everlost iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F293B3CC15EB7BE500256477 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		F293B3CE15EB7BE500256477 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -348,7 +388,7 @@
 		F293B3D615EB7BE500256477 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		F293B3D815EB7BE500256477 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		F293B3DA15EB7BE500256477 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		F293BB7E15EB831F00256477 /* AppDelegate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AppDelegate.cpp; path = ../Classes/AppDelegate.cpp; sourceTree = "<group>"; };
+		F293BB7E15EB831F00256477 /* AppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = AppDelegate.mm; path = ../Classes/AppDelegate.mm; sourceTree = "<group>"; };
 		F293BB7F15EB831F00256477 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = ../Classes/AppDelegate.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -380,6 +420,21 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DAAAE9B91928A9D0007F8EB1 /* UIKit.framework in Frameworks */,
+				DAAAE9B71928A9C2007F8EB1 /* Twitter.framework in Frameworks */,
+				DAAAE9B51928A9AF007F8EB1 /* Social.framework in Frameworks */,
+				DAAAE9B31928A9A3007F8EB1 /* Foundation.framework in Frameworks */,
+				DAAAE9B11928A998007F8EB1 /* CoreImage.framework in Frameworks */,
+				DAAAE9AF1928A988007F8EB1 /* Accounts.framework in Frameworks */,
+				DAAAE9AD1928A93F007F8EB1 /* SystemConfiguration.framework in Frameworks */,
+				DAAAE9AB1928A937007F8EB1 /* Security.framework in Frameworks */,
+				DAAAE9A91928A92B007F8EB1 /* QuartzCore.framework in Frameworks */,
+				DAAAE9A71928A91B007F8EB1 /* OpenGLES.framework in Frameworks */,
+				DAAAE9A51928A90C007F8EB1 /* MessageUI.framework in Frameworks */,
+				DAAAE9A31928A906007F8EB1 /* MediaPlayer.framework in Frameworks */,
+				DAAAE9A01928A8F6007F8EB1 /* CoreText.framework in Frameworks */,
+				DAAAE9A11928A8F6007F8EB1 /* CoreVideo.framework in Frameworks */,
+				DAAAE99D1928A8DA007F8EB1 /* CoreMedia.framework in Frameworks */,
 				C03781F618BF65B100FE4F13 /* libluabindings iOS.a in Frameworks */,
 				15A8A4441834C43700142BE0 /* libchipmunk iOS.a in Frameworks */,
 				15A8A4451834C43700142BE0 /* libcocos2dx iOS.a in Frameworks */,
@@ -394,6 +449,7 @@
 				F293B3D315EB7BE500256477 /* AudioToolbox.framework in Frameworks */,
 				F293B3D515EB7BE500256477 /* AVFoundation.framework in Frameworks */,
 				F293B3D915EB7BE500256477 /* Foundation.framework in Frameworks */,
+				DAAAE995192894E3007F8EB1 /* Kamcord.framework in Frameworks */,
 				F293B3DB15EB7BE500256477 /* CoreGraphics.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -501,9 +557,30 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		DAAAE98E192894E3007F8EB1 /* Kamcord.embeddedframework */ = {
+			isa = PBXGroup;
+			children = (
+				DAAAE98F192894E3007F8EB1 /* Kamcord.framework */,
+				DAAAE990192894E3007F8EB1 /* Resources */,
+			);
+			path = Kamcord.embeddedframework;
+			sourceTree = "<group>";
+		};
+		DAAAE990192894E3007F8EB1 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				DAAAE991192894E3007F8EB1 /* Kamcord.bundle */,
+				DAAAE992192894E3007F8EB1 /* KamcordiPad.storyboardc */,
+				DAAAE993192894E3007F8EB1 /* KamcordiPhone.storyboardc */,
+				DAAAE994192894E3007F8EB1 /* KC_GTMOAuth2ViewTouch.nib */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		F293B3BD15EB7BE500256477 = {
 			isa = PBXGroup;
 			children = (
+				DAAAE98E192894E3007F8EB1 /* Kamcord.embeddedframework */,
 				C03781AE18BF654500FE4F13 /* cocos2d_lua_bindings.xcodeproj */,
 				15A8A4031834BDA200142BE0 /* cocos2d_libs.xcodeproj */,
 				5023810617EBBCAC00990C9B /* ios */,
@@ -528,6 +605,21 @@
 		F293B3CB15EB7BE500256477 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				DAAAE9B81928A9D0007F8EB1 /* UIKit.framework */,
+				DAAAE9B61928A9C2007F8EB1 /* Twitter.framework */,
+				DAAAE9B41928A9AF007F8EB1 /* Social.framework */,
+				DAAAE9B21928A9A3007F8EB1 /* Foundation.framework */,
+				DAAAE9B01928A998007F8EB1 /* CoreImage.framework */,
+				DAAAE9AE1928A988007F8EB1 /* Accounts.framework */,
+				DAAAE9AC1928A93F007F8EB1 /* SystemConfiguration.framework */,
+				DAAAE9AA1928A937007F8EB1 /* Security.framework */,
+				DAAAE9A81928A92B007F8EB1 /* QuartzCore.framework */,
+				DAAAE9A61928A91B007F8EB1 /* OpenGLES.framework */,
+				DAAAE9A41928A90C007F8EB1 /* MessageUI.framework */,
+				DAAAE9A21928A906007F8EB1 /* MediaPlayer.framework */,
+				DAAAE99E1928A8F6007F8EB1 /* CoreText.framework */,
+				DAAAE99F1928A8F6007F8EB1 /* CoreVideo.framework */,
+				DAAAE99C1928A8DA007F8EB1 /* CoreMedia.framework */,
 				15A8A4871834C90E00142BE0 /* libcurl.dylib */,
 				D6B061341803AC000077942B /* CoreMotion.framework */,
 				50D7C96F17EBBEEC005D0B91 /* IOKit.framework */,
@@ -555,7 +647,7 @@
 				DA897781191E661500F2CF94 /* EventDef.h */,
 				DA7888D91915483B008F12D3 /* TestMapScene.cpp */,
 				DA7888DA1915483B008F12D3 /* TestMapScene.h */,
-				F293BB7E15EB831F00256477 /* AppDelegate.cpp */,
+				F293BB7E15EB831F00256477 /* AppDelegate.mm */,
 				F293BB7F15EB831F00256477 /* AppDelegate.h */,
 			);
 			name = Classes;
@@ -794,7 +886,10 @@
 				C03781D318BF656A00FE4F13 /* Cocos2d.lua in Resources */,
 				5091733917ECE17A00D62437 /* Icon-58.png in Resources */,
 				C03781ED18BF656A00FE4F13 /* Opengl.lua in Resources */,
+				DAAAE997192894E3007F8EB1 /* KamcordiPad.storyboardc in Resources */,
 				C03781F118BF656A00FE4F13 /* StudioConstants.lua in Resources */,
+				DAAAE999192894E3007F8EB1 /* KC_GTMOAuth2ViewTouch.nib in Resources */,
+				DAAAE996192894E3007F8EB1 /* Kamcord.bundle in Resources */,
 				5023811F17EBBCAC00990C9B /* Icon-152.png in Resources */,
 				C03781D118BF656A00FE4F13 /* CCBReaderLoad.lua in Resources */,
 				5023812017EBBCAC00990C9B /* Icon-57.png in Resources */,
@@ -802,6 +897,7 @@
 				C03781B918BF655400FE4F13 /* res in Resources */,
 				C03781EF18BF656A00FE4F13 /* OpenglConstants.lua in Resources */,
 				C03781E518BF656A00FE4F13 /* GuiConstants.lua in Resources */,
+				DAAAE998192894E3007F8EB1 /* KamcordiPhone.storyboardc in Resources */,
 				5023812217EBBCAC00990C9B /* Icon-76.png in Resources */,
 				C03781DF18BF656A00FE4F13 /* DeprecatedOpenglEnum.lua in Resources */,
 				5091733A17ECE17A00D62437 /* Icon-80.png in Resources */,
@@ -846,7 +942,7 @@
 			files = (
 				DA7888DC1915483B008F12D3 /* TestMapScene.cpp in Sources */,
 				C06E23C418CEF9740093C81A /* main.cpp in Sources */,
-				5023813317EBBCE400990C9B /* AppDelegate.cpp in Sources */,
+				5023813317EBBCE400990C9B /* AppDelegate.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -855,7 +951,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5023812517EBBCAC00990C9B /* RootViewController.mm in Sources */,
-				F293BB9C15EB831F00256477 /* AppDelegate.cpp in Sources */,
+				F293BB9C15EB831F00256477 /* AppDelegate.mm in Sources */,
 				DA7888DB1915483B008F12D3 /* TestMapScene.cpp in Sources */,
 				5023812417EBBCAC00990C9B /* main.m in Sources */,
 				5023811817EBBCAC00990C9B /* AppController.mm in Sources */,
@@ -1035,6 +1131,10 @@
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COMPRESS_PNG_FILES = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Kamcord.embeddedframework",
+				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = ios/Prefix.pch;
@@ -1058,6 +1158,10 @@
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COMPRESS_PNG_FILES = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Kamcord.embeddedframework",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = ios/Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = (
