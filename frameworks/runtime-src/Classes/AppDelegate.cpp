@@ -5,8 +5,6 @@
 
 #include "TestMapScene.h"
 
-#import <Kamcord/Kamcord.h>
-
 using namespace CocosDenshion;
 
 USING_NS_CC;
@@ -27,7 +25,7 @@ bool AppDelegate::applicationDidFinishLaunching()
     auto director = Director::getInstance();
 	auto glview = director->getOpenGLView();
 	if(!glview) {
-		glview = GLView::createWithRect("everlost", cocos2d::Rect(0,0,900,640));
+		glview = GLView::createWithRect("everlost", Rect(0,0,900,640));
 		director->setOpenGLView(glview);
 	}
 
@@ -77,13 +75,6 @@ bool AppDelegate::applicationDidFinishLaunching()
     engine->executeString(env.c_str());
     
     engine->executeScriptFile(path.c_str());
-    
-    director->getEventDispatcher()->addCustomEventListener("showKamcord", [](EventCustom* ev)
-                                                           {
-                                                               log("showKamcord");
-                                                               [Kamcord stopRecording];
-                                                               [Kamcord showView];
-                                                           });
     
     return true;
 }
